@@ -45,52 +45,48 @@ var tmpl_icon = L.Icon.extend({
 });
 
 //Init three instances of class template icon 
-var icon_campside = new tmpl_icon({'iconUrl':'icons/house_icon.png'});
-var icon_house = new tmpl_icon({'iconUrl':'icons/tent_icon.png'});
+var icon_campside = new tmpl_icon({'iconUrl':'icons/tent_icon.png'});
+var icon_house = new tmpl_icon({'iconUrl':'icons/house_icon.png'});
 var icon_mixed = new tmpl_icon({'iconUrl':'icons/mixed_icon.png'});
+var icon_jamboree = new tmpl_icon({'iconUrl':'icons/jamboree_icon.png'});
+var icon_jamborette = new tmpl_icon({'iconUrl':'icons/jamborette_icon.png'});
+var icon_poi = new tmpl_icon({'iconUrl':'icons/poi_icon.png'});
 
 //Init icon layer groups
 var campside_house = new L.LayerGroup(),
-    campside_yard = new L.LayerGroup();
+    campside_yard = new L.LayerGroup(),
+	campside_mixed = new L.LayerGroup(),
+	campsite_jamboree = new L.LayerGroup(),
+	campsite_jamborette = new L.LayerGroup(),
+	poi = new L.LayerGroup();
 
 /*****************
  * SETUP MARKERS *
  *****************/
+var cathegory_types = ["tent", "house", "mixed", "jamboree", "jamborette", "poi"];
+var layer_groups = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette, poi];
+var icon_list = [icon_campside, icon_house, icon_mixed, icon_jamboree, icon_jamborette, icon_poi];
 
-//Add markers to layers
-for (i in list_tent){
-	L.marker([list_tent[i].coords.lat,list_tent[i].coords.lng], {icon : icon_campside})
-	.bindPopup(list_tent[i].name)
+var entry_id = 1;
+for (elem in list_places){
+	var index = cathegory_types.indexOf(list_places[elem].cathegory);
+	list_places[elem].id = entry_id;
+
+	L.marker([list_places[elem].coords.lat, list_places[elem].coords.lng], 
+		{icon : icon_list[index], alt : entry_id})
+	.bindPopup(list_places[elem].name)
 	.on('mouseover', function (e) {this.openPopup(); })
 	.on('mouseout', function (e) {this.closePopup(); })
-	.on('click',   function(e) { updateSidebar(this._popup._content,1);}) //replace by this.sourcetarget.options.alt
-	.addTo(campside_house);
+	.on('click',   function(e) { updateSidebar(this._icon.alt,1);}) //this._popup._content//replace by this.sourcetarget.options.alt
+	.addTo(layer_groups[index]);
+	entry_id++;
 }
-
-for (j in list_house){
-	L.marker([list_house[j].coords.lat,list_house[j].coords.lng], {icon : icon_house})
-	.bindPopup(list_house[j].name)
-	.on('mouseover', function (e) {this.openPopup(); })
-	.on('mouseout', function (e) {this.closePopup(); })
-	.on('click',   function(e) { updateSidebar(this._popup._content,1);}) //replace by this.sourcetarget.options.alt
-	.addTo(campside_house);
-}
-for (k in list_mixed){
-	L.marker([list_mixed[k].coords.lat,list_mixed[k].coords.lng], {icon : icon_mixed})
-	.bindPopup(list_mixed[k].name)
-	.on('mouseover', function (e) {this.openPopup(); })
-	.on('mouseout', function (e) {this.closePopup(); })
-	.on('click',   function(e) { updateSidebar(this._popup._content,1);}) //replace by this.sourcetarget.options.alt
-	.addTo(campside_house);
-}
-
- var list = Object.assign({}, list_mixed, list_house, list_tent);
-
 
 //Create dicts for control box
 var overlays = {
 	"Lagerplatz mit Haus: " : campside_house,
-	"Lagerplatz mit Wiese" : campside_yard
+	"Lagerplatz mit Zeltplatz" : campside_yard,
+	"Mixed" : campside_mixed,
 };
 
 /**************************************
@@ -105,7 +101,7 @@ var campsides_map = L.map('map', {
 	attributionControl: true,
 	zoomControl: false,
 	measureControl: false,
-	layers: [osm, campside_house,campside_yard]
+	layers: [osm, campside_house,campside_yard, campside_mixed]
 });
 
 //Add layers to map 
@@ -154,11 +150,11 @@ var options = {
    	findAllMatches: true,
     minMatchCharLength: 3,
     threshold: 0.5,
-  	keys: ["name"]
+  	keys: ["name", "tag", "postal code", "state", "country"]
 };
 
 //Init fuse search
-var fuse = new Fuse(list_house, options);
+var fuse = new Fuse(list_places, options);
 
 /*****************************
  * LEAFLETJS RELVATED EVENTS *
@@ -179,29 +175,35 @@ lft_sidebar.on('closing', function () {
 
 //@function updateSidebar (String cs_name, Int prev_state{0,1})
 //Update Sidebar after marker onclick-event 
-function updateSidebar (cs_name,prev_state) {
-	var index = list_table[cs_name];
-
+function updateSidebar (index,prev_state) {
+	var cur_entry = list_places[--index];
+	console.log(cur_entry);
+	
 	if (prev_state==0)
-		campsides_map.flyTo([list[index].coords.lat,list[index].coords.lng],campsides_map.getZoom(),{duration: 2});
+		campsides_map.flyTo([cur_entry.coords.lat,cur_entry.coords.lng],campsides_map.getZoom(),{duration: 2});
 
 	lft_sidebar.open('home');
+	document.getElementById("campside_name").innerHTML = cur_entry.name;
+	document.getElementById("campside_desc").innerHTML = cur_entry.desc;
+	document.getElementById("campside_website").href = cur_entry.website;
+	document.getElementById("campside_addr").innerHTML = cur_entry.addr;
+	document.getElementById("campside_addr2").innerHTML = cur_entry.postalcode;
+	document.getElementById("campside_addr3").innerHTML = cur_entry.state + " - " + cur_entry.country;
+	document.getElementById("campside_koords").innerHTML = cur_entry.coords.lat + " " + cur_entry.coords.lng;
+	document.getElementById("campside_tags").innerHTML = "Tags: " + cur_entry.tag;
+	document.getElementById("campside_img").src  = "./img-entries/logo_bzw.png"; //"img-entries/" + cur_entry.imgsrc;
 
-	document.getElementById("campside_name").innerHTML = list[index].name;
-	document.getElementById("campside_desc").innerHTML = list[index].desc;
-	document.getElementById("campside_website").href = list[index].website;
-	document.getElementById("campside_addr").innerHTML = list[index].addr;
-	document.getElementById("campside_koords").innerHTML = list[index].coords.lat + " " + list[index].coords.lng;
-	document.getElementById("campside_tags").innerHTML = list[index].tag;
+	console.log("img-entries/" + cur_entry.imgsrc);
 }
 
 //@function openInMaps
 //Open a new tab with Google Maps pointing towards the coords of the current location 
 function openInMaps() {
-	var name_cur = document.getElementById("campside_name").innerHTML;
-	var index = list_table[name_cur];
-
-	window.open("https://www.google.com/maps/place/" + list[index].coords.lat + "\°N" + list[index].coords.lng + "\°E", '_blank');
+	var coords_cur = document.getElementById("campside_koords").innerHTML;
+	
+	coords_cur = coords_cur.split(" ");
+	console.log(coords_cur);
+	window.open("https://www.google.com/maps/place/" + coords_cur[0] + "\°N" + coords_cur[1] + "\°E", '_blank');
 }
 
 //@function updateSearch (String term)
@@ -211,7 +213,7 @@ function updateSearch(term) {
 	var results = fuse.search(term)
 	
 	for (i in results) {
-		answer = answer +  "<p class=\"searchResult\" onclick=\"updateSidebar(this.innerHTML,0)\" >" + results[i].item.name+ "</p> ";
+		answer = answer +  "<p id=\" "+ results[i].item.id +" \" class=\"searchResult\" onclick=\"updateSidebar(this.id,0)\" >" + results[i].item.name+ "</p> ";
 	}
 	document.getElementById("search_results").innerHTML = answer;
 }

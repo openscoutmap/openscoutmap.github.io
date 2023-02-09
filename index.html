@@ -16,6 +16,7 @@
  	<script src="leaflet-measure/leaflet-measure.js"></script>
 	<script src="sidebar-v2/js/leaflet-sidebar.js"></script>
 	<script src="fuse/fuse.min.js"></script> <!--fuse/dist/fuse.js -->
+	<script src="https://fahrplan.oebb.at/webapp/staticfiles/hafas-widget-core.1.0.0.js?language=de_DE"></script>
 
  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -80,10 +81,12 @@
             	<ul>
             		<li><a href="https://Gruppe19.at" target="_blank" id="campside_website">Website</a> </li>
             		<li id="campside_addr">Adresse</li>
+					<li id="campside_addr2">Adresse</li>
+					<li id="campside_addr3">Adresse</li>
             		<li id="campside_koords">Koordinate: Lat: <span id="test1"></span> Ing: <span id="test2"></span></li>
             		<li id="campside_tags">Tags</li>
-            		<li>Foto</li>
             	</ul>
+				<img id="campside_img "style="background-color: aqua;" id="campside_img" src="">
             	In anderer Karte anzeigen:
             	<input type="submit"  class = "button_input" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
             </p> 
@@ -131,7 +134,7 @@
 			<p>
 				Nach Eingabe der Daten wirst du auf die Seite der ÖBB weitergeleitet.
 			
-			<iframe src="scotty.html" frameborder="0" ></iframe>
+			<iframe src="scotty_new.html" frameborder="0" ></iframe>
 			<span class="hint">Zur Verfügung gestellt von <a href="https://personenverkehr.oebb.at/">ÖBB-PV AG </a>&copy;.</span>
 			</p>
         </div>
@@ -151,6 +154,22 @@
 					<tr>
             			<td><img src="icons/mixed_icon.png" class="map_icon"></td>
             			<td>Pfadfinderheim inkl Lagerplatz</td>
+            		</tr>
+					<tr>
+            			<td><img src="icons/jamborette_icon.png" class="map_icon"></td>
+            			<td>Jamborette</td>
+            		</tr>
+					<tr>
+            			<td><img src="icons/jamboree_icon.png" class="map_icon"></td>
+            			<td>Jamboree</td>
+            		</tr>
+					<tr>
+            			<td><img src="icons/poi_icon.png" class="map_icon"></td>
+            			<td>Point of Interest</td>
+            		</tr>
+					<tr>
+            			<td><img src="icons/circle_icon.png" class="map_icon"></td>
+            			<td>TBA</td>
             		</tr>
             	</table>
             </p>
@@ -177,6 +196,11 @@
             <p>
             	Inspired by <a href="http://lagerplaetze.scoutware.at/" target="_blank">Scoutware</a>
             </p>
+			<p>
+            	Mentioned offical Austrian Campsites: <a href="https://ppoe.at/lagerplaetze/" target="_blank">PPÖ ASCN</a>
+            </p>
+
+
             <p>Based on the following resources:  
             	<ul>
             		<li><a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></li>
@@ -204,7 +228,7 @@
         </div>
     </div>
     </div>
-    <script src="js/dev.js"></script>
+    <script src="js/data.js"></script>
  	<script src="js/map.js"></script>
 </body>
 </html>
