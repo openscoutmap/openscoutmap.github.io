@@ -185,7 +185,6 @@ lft_sidebar.on('closing', function () {
 //Update Sidebar after marker onclick-event 
 function updateSidebar(index, prev_state) {
 	var cur_entry = list_places[--index];
-	console.log(cur_entry);
 
 	if (prev_state == 0)
 		campsides_map.flyTo([cur_entry.coords.lat, cur_entry.coords.lng], campsides_map.getZoom(), { duration: 2 });
@@ -200,8 +199,6 @@ function updateSidebar(index, prev_state) {
 	document.getElementById("campside_koords").innerHTML = cur_entry.coords.lat + " " + cur_entry.coords.lng;
 	document.getElementById("campside_tags").innerHTML = "Tags: " + cur_entry.tag;
 	document.getElementById("campside_img").src = "./img-entries/logo_bzw.png"; //"img-entries/" + cur_entry.imgsrc;
-
-	console.log("img-entries/" + cur_entry.imgsrc);
 }
 
 //@function openInMaps
@@ -210,7 +207,6 @@ function openInMaps() {
 	var coords_cur = document.getElementById("campside_koords").innerHTML;
 
 	coords_cur = coords_cur.split(" ");
-	console.log(coords_cur);
 	window.open("https://www.google.com/maps/place/" + coords_cur[0] + "\°N" + coords_cur[1] + "\°E", '_blank');
 }
 
@@ -230,37 +226,28 @@ function updateSearch(term) {
 //Creates/removes draggable search radius and marker on map
 function searchRadius() {
 	var radius_des = document.getElementById("search-radius").value * 1000;
-	var circle = L.circle(campsides_map.getCenter(), {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5,
-		radius: 500
-	}).addTo(campside_house);
-	/*
 
 	if (marker_circles.getLayers() == 0) {
-		
+
 		var circle = L.circle(campsides_map.getCenter(), {
-				color: 'gray',
-				draggable: true,
-				autoPan: true,
-				fillOpacity: 0.5,
-				radius: radius_des
-			}).addTo(marker_circles);
-		
-			console.log(circle);
+			color: 'gray',
+			draggable: true,
+			autoPan: true,
+			fillOpacity: 0.5,
+			radius: radius_des
+		}).addTo(marker_circles);
 
 		var circle_center = L.marker(campsides_map.getCenter(), {
 			draggable: true,
-			icon : icon_circle
-		}).on('move', function (e) {circle.setLatLng(e.latlng);})
-		.addTo(marker_circles);
-	document.getElementById("search-status").value = "Ursprung entfernen";
+			icon: icon_circle
+		}).on('move', function (e) { circle.setLatLng(e.latlng); })
+			.addTo(marker_circles);
+		document.getElementById("search-status").value = "Ursprung entfernen";
 	}
 	else {
 		document.getElementById("search-status").value = "Ursprung setzen";
 		marker_circles.clearLayers();
-	} */
+	}
 }
 
 //function setSearchRadius(number radius)
