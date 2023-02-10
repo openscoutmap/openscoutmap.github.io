@@ -63,12 +63,12 @@
                 <li><a href="#home" role="tab"><i class="fas fa-map-marked"></i></a></li>
                 <li><a href="#search" role="tab"><i class="fas fa-search"></i></a></li>
                 <li><a href="#filter" role="tab"><i class="fas fa-filter"></i></a></li>
-                <li><a href="#account" role="tab"><i class="fas fa-user"></i></a></li>
                 <li><a href="#scotty" role="tab"><i class="fas fa-train"></i></a></li>
                 <li><a href="#help" role="tab"><i class="fas fa-question"></i></a></li>
             </ul>
 
             <ul role="tablist">
+                <li><a href="#account" role="tab"><i class="fas fa-user"></i></a></li>
                 <li><a href="#export" role="tab"><i class="fas fa-file-export"></i></a></li>
                 <li><a href="#contact" role="tab"><i class="fas fa-envelope"></i></a></li>
                 <li><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
@@ -94,10 +94,12 @@
                     </li>
                     <li id="campside_tags">Tags</li>
                 </ul>
-                <img id="campside_img " style="background-color: aqua;" id="campside_img" src="">
+                <img id="campside_img" src="img-entries/logo_lvnoe.png">
+                </p>
+                <p>
                 In anderer Karte anzeigen:
                 <input type="submit" class="button" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
-                </p>
+             </p>
             </div>
 
             <div class="sidebar-pane" id="search">
@@ -167,10 +169,11 @@
                     <p>
                     <ul>
                         <li> Drag and Drop!</li>
+                        <li> POI beliebig benennen!</li>
                         <li> Mit Doppelklick auf Marker kannst du diesen entfernen.</li>
                     </ul>
                     </p>
-
+                    <input type="textbox" id="label_new_poi" class="text_input" placeholder="Label f&uuml;r neuen POI">
                     <input type="button" class="button" value="Punkt setzen" onclick="setPoi()">
                     <input type="button" class="button" value="Alles löschen" onclick="deleteAllPoi()">
                 </form>
@@ -179,16 +182,20 @@
             <div class="sidebar-pane" id="account">
                 <h1 class="sidebar-header">Account<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
+                <h2>
+                    Login
+                </h2>
                 <p>
-                    <b>Login</b>
                 <form id="account_login">
                     <input type="text" name="user_name" class="text_input" placeholder="E-Mail Adresse">
                     <input type="password" name="user_passwd" class="text_input" placeholder="Password">
                     <input type="submit" class="button" value="Anmelden" name="button_submit">
                 </form>
                 </p>
+                <h2>
+                    Registierung
+                </h2>
                 <p>
-                    <b>Registierung</b> <br>
                     Du bist noch nicht registriert? Dann hinterlasse hier deine Email-Adresse und du bekommst
                     Anmeldedaten zugesendet.
                 <form id="account_register">
@@ -219,8 +226,10 @@
             <div class="sidebar-pane" id="help">
                 <h1 class="sidebar-header">Legende<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
+                <h2>
+                    Kartensymbole
+                </h2>
                 <p>
-                    <b>Kartensymbole</b>
                 <table>
                     <tr>
                         <td><img src="icons/tent_icon.png" class="map_icon"> </td>
@@ -318,6 +327,10 @@
     <script src="js/data.js"></script>
     <script src="js/map.js"></script>
     <script src="js/colorWheel.js"></script>
+    <script>
+        updateSidebar(1,0,0);
+                
+    </script>
 
 </body>
 

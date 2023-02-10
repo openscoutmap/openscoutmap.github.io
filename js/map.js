@@ -80,7 +80,7 @@ for (elem in list_places) {
 		.bindPopup(list_places[elem].name)
 		.on('mouseover', function (e) { this.openPopup(); })
 		.on('mouseout', function (e) { this.closePopup(); })
-		.on('click', function (e) { updateSidebar(this._icon.alt, 1); }) //this._popup._content//replace by this.sourcetarget.options.alt
+		.on('click', function (e) { updateSidebar(this._icon.alt, 1, 1); }) //this._popup._content//replace by this.sourcetarget.options.alt
 		.addTo(layer_groups[index]);
 	entry_id++;
 }
@@ -90,6 +90,8 @@ var overlays = {
 	"Lagerplatz mit Haus: ": campside_house,
 	"Lagerplatz mit Zeltplatz": campside_yard,
 	"Mixed": campside_mixed,
+	"Jamborette" : campsite_jamborette,
+	"Jamboree" : campsite_jamboree
 };
 
 /**************************************
@@ -105,7 +107,7 @@ var campsides_map = L.map('map', {
 	zoomControl: false,
 	measureControl: false,
 	dragging: true,
-	layers: [osm, campside_house, campside_yard, campside_mixed]
+	layers: [osm, campside_house, campside_yard, campside_mixed, campsite_jamboree, campsite_jamborette]
 });
 
 //Add layers to map 
@@ -180,16 +182,15 @@ lft_sidebar.on('closing', function () {
 /********************
  * CUSTOM FUNCTIONS *
  ********************/
-
-//@function updateSidebar (String cs_name, Int prev_state{0,1})
+//@function updateSidebar (String cs_name, Int prev_state{0,1}, Int opensidebar{0,1})
 //Update Sidebar after marker onclick-event 
-function updateSidebar(index, prev_state) {
+function updateSidebar(index, prev_state, opensidebar) {
 	var cur_entry = list_places[--index];
-
-	if (prev_state == 0)
-		campsides_map.flyTo([cur_entry.coords.lat, cur_entry.coords.lng], campsides_map.getZoom(), { duration: 2 });
-
-	lft_sidebar.open('home');
+	if (opensidebar == 1){
+		if (prev_state == 0)
+			campsides_map.flyTo([cur_entry.coords.lat, cur_entry.coords.lng], campsides_map.getZoom(), { duration: 2 });
+		lft_sidebar.open('home');
+	}
 	document.getElementById("campside_name").innerHTML = cur_entry.name;
 	document.getElementById("campside_desc").innerHTML = cur_entry.desc;
 	document.getElementById("campside_website").href = cur_entry.website;
@@ -197,8 +198,22 @@ function updateSidebar(index, prev_state) {
 	document.getElementById("campside_addr2").innerHTML = cur_entry.postalcode;
 	document.getElementById("campside_addr3").innerHTML = cur_entry.state + " - " + cur_entry.country;
 	document.getElementById("campside_koords").innerHTML = cur_entry.coords.lat + " " + cur_entry.coords.lng;
-	document.getElementById("campside_tags").innerHTML = "Tags: " + cur_entry.tag;
-	document.getElementById("campside_img").src = "./img-entries/logo_bzw.png"; //"img-entries/" + cur_entry.imgsrc;
+	document.getElementById("campside_img").src = "./img-entries/" + cur_entry.imgsrc;
+	var tag_array = cur_entry.tag.trim().split(",");
+	var tag_str = "Tags: ";
+	for (tag in tag_array){
+		tag_str += "<span class=\"tag_link\" onclick=\"openTagInSearch(this.innerHTML)\" >" + tag_array[tag] + "</span>, ";
+	}
+	document.getElementById("campside_tags").innerHTML = tag_str.substring(0, tag_str.length-2);
+
+}
+
+function openTagInSearch(tag) {
+	console.log(tag);
+	lft_sidebar.open('search');
+	document.getElementById("globalsarch").value = tag;
+	updateSearch(tag);
+
 }
 
 //@function openInMaps
@@ -217,7 +232,7 @@ function updateSearch(term) {
 	var results = fuse.search(term)
 
 	for (i in results) {
-		answer = answer + "<p id=\" " + results[i].item.id + " \" class=\"searchResult\" onclick=\"updateSidebar(this.id,0)\" >" + results[i].item.name + "</p> ";
+		answer = answer + "<p id=\" " + results[i].item.id + " \" class=\"searchResult\" onclick=\"updateSidebar(this.id,0, 1)\" >" + results[i].item.name + "</p> ";
 	}
 	document.getElementById("search_results").innerHTML = answer;
 }
@@ -260,8 +275,11 @@ function setPoi() {
 		draggable: true,
 		autoPan: true,
 		icon: icon_poi
-	}).on('dblclick', function (e) { this.remove(); })
-		.addTo(marker_poi);
+	}).bindPopup(document.getElementById("label_new_poi").value)
+	.on('mouseover', function (e) { this.openPopup(); })
+	.on('mouseout', function (e) { this.closePopup(); })
+	.on('dblclick', function (e) { this.remove(); })
+	.addTo(marker_poi);
 }
 
 function deleteAllPoi() {

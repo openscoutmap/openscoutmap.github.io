@@ -137,6 +137,10 @@ textarea.text_input {
   background-color: var(--color_main);
 }
 
+#sidebar {
+  background-color: #043069;
+}
+
 .sidebar-tabs>li.active,
 .sidebar-tabs>ul>li.active {
   background-color: var(--color_main);
@@ -145,6 +149,19 @@ textarea.text_input {
 /****************
  * HOMEMENU TAB *
  ****************/
+ #campside_img {
+  width: 50%;
+  margin: 0 25% 0 25%;
+}
+
+.tag_link {
+  color: #043069;
+  font-style: italic;
+}
+
+.tag_link:hover {
+  font-weight: 600;
+}
 
 /**************
  * SEARCH TAB *
