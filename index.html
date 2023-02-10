@@ -26,26 +26,26 @@
 
 <body onload="checkCookies()">
 	<div id="m_ls_warn">Bitte das Gerät drehen/Please rotate your device</div>
-	<div id="overlay_layer" style="visibility: hidden"> </div >
-	<div class="textOverlay" id="overlay_startup" style="visibility: hidden">
-		<p >
-			<span id="headerTitle">OpenScoutMap</span> <br> 
-			Wichtigsten Funktionen des Tools <br>
-		</p>
-		<p class="infos">
-			<i class="fas fa-bars"></i> Hier werden die Info anzeigt. Einfach dafür auf einen Marker klicken<br>
-			<i class="fas fa-filter"></i> Hier kannst du in Zunkuft mal nach bestimmten Kriterien filtern<br>
-			<i class="fas fa-train"></i>Hier kannst du deine öffentliche Anreise schon mal planen<br>
-			<i class="fas fa-envelope"></i> Hier kannst du mit mir in Kontakt treten<br>
-			<i class="fas fa-info-circle"></i> Hier versteckt sich der heilige Gral<br>
-			Findest du das versteckte Cookie?
-		</p>
-		<p class="interact">
-			<input type="button" name="buttonStart" value="Starten" class="button_input" onclick="endStartup()"> <br> 
-			<input type="checkbox" id="showStartupAgain" value="false">
-			<span class ="hint">Du willst die Einführung nicht wieder sehen? Einfach einen Haken setzen!</span> 
-		</p>
-	</div>
+	<div id="overlay_bg"></div >
+		<section id="overlay_content">
+			<div> 
+				<h1>OpenScoutMap</h1> 
+				<h3>Wichtigsten Funktionen des Tools</h3>      
+				<ul>
+					<li><i class="fas fa-bars"></i> Hier werden die Info anzeigt. Einfach dafür auf einen Marker klicken</li>
+					<li><i class="fas fa-filter"></i> Hier kannst du in Zunkuft mal nach bestimmten Kriterien filtern</li>
+					<li><i class="fas fa-train"></i> Hier kannst du deine öffentliche Anreise schon mal planen</li>
+					<li><i class="fas fa-envelope"></i> Hier kannst du mit mir in Kontakt treten</li>
+					<li><i class="fas fa-info-circle"></i> Hier versteckt sich der heilige Gral</li>
+					<li>Findest du das versteckte Cookie?</li>
+				</ul>
+				<form >
+					<input type="button" name="buttonStart" value="Starten" class="button" onclick="endStartup()">  
+					<input type="checkbox" name="ov_cb" value="false" id="showStartupAgain"> 
+					<label for="ov_cb"class ="hint">Du willst die Einführung nicht wieder sehen? Einfach einen Haken setzen!</label>
+				</form>
+			</div>
+		</section>
 
 	<div id="map"></div>
 	<div id="sidebar" class="sidebar collapsed">
@@ -59,15 +59,14 @@
             <li><a href="#account" role="tab"><i class="fas fa-user"></i></a></li>
             <li><a href="#scotty" role="tab"><i class="fas fa-train"></i></a></li>
             <li><a href="#help" role="tab"><i class="fas fa-question"></i></a></li>
-            <li><a href="#contact" role="tab"><i class="fas fa-envelope"></i></a></li>
-            <li><a href="#about" role="tab"><i class="fas fa-info-circle"></i></a></li>
-
-                
         </ul>
 
-        <ul role="tablist">
-            <li><a href="#settings" role="tab"><i class="fa fa-cookie"></i></a></li>
-        </ul>
+		<ul role="tablist">
+			<li><a href="#export" role="tab"><i class="fas fa-file-export"></i></a></li>
+			<li><a href="#contact" role="tab"><i class="fas fa-envelope"></i></a></li>
+			<li><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
+			<li><a href="#about" role="tab"><i class="fas fa-info-circle"></i></a></li>
+		</ul>
     </div>
 
     <!-- Tab panes -->
@@ -103,10 +102,66 @@
             
         </div>
 
-        <div class="sidebar-pane" id="filter">
-            <h1 class="sidebar-header">Filter<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+		<div class="sidebar-pane" id="filter">
+			<h1 class="sidebar-header">Filter<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+			<h2>Lagerplatz Typ</h2>
+			<form name=filter> 
+				<label class="chkbx" for="Test1">
+					<input type="checkbox" name="checkbox1" name="Test1">Pfadfinderheim
+				</label> 
+				<label class="chkbx" for="Test2">
+					<input type="checkbox" name="checkbox1" name="Test2">Lagerplatz
+				</label>
+				<label class="chkbx" for="Test3">
+					<input type="checkbox" name="checkbox1" name="Test3">Hybrid
+				</label>
 
-        </div>
+				<h2>Geografische Lage</h2>
+				<label for="fedStates">Bundesländer</label>
+				<select name="fedStates">
+					<option value="bgl">Burgenland</option>
+					<option value="ktn">Kärnten</option>
+					<option value="noe">Niederösterreich</option>
+					<option value="ooe">Oberösterreich</option>
+					<option value="sbg">Salzburg</option>
+					<option value="stm">Steiermark</option>
+					<option value="trl">Tirol</option>
+					<option value="vab">Vorarlberg</option>
+					<option value="vie">Wien</option>
+				</select>
+				<h2>Umkreis</h2>
+				<p>
+					<ul> 
+						<li> Drag and Drop!</li>
+						<li>Hebe Lagerplätze in einem bestimmten Umkreis hervor</li>
+						<li>Setze den Startpunkt und schon gehts los</li>
+						<li>Der Suchradius kann jederzeit verstellt werden</li>
+
+					</ul>
+					
+				</p>
+				<label class="chkbx" for="Test1">Umkreis in km
+					<input id="search-radius" type="number" step="0.001" min=0 value=1 name="" onchange="setSearchRadius(this.value)">
+				</label>
+				<input id="search-status" type="button" class="button" value="Ursprung setzen" onclick="searchRadius()""> 
+
+
+				
+				<h2>Points of Interest</h2>
+				<p>
+					Setze nach belieben eigene Punkte. Achtung, diese sind nur temporär da!
+				</p>
+				<p>
+					<ul> 
+						<li> Drag and Drop!</li>
+						<li> Mit Doppelklick auf Marker kannst du diesen entfernen.</li> 
+					</ul>
+				</p>
+				
+				<input type="button" class="button" value="Punkt setzen" onclick="setPoi()">
+				<input type="button" class="button" value="Alles löschen" onclick="deleteAllPoi()">
+			</form>
+		</div>
 
         <div class="sidebar-pane" id="account">
             <h1 class="sidebar-header">Account<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
@@ -128,6 +183,11 @@
        	 	</p>
 
         </div>
+
+		<div class="sidebar-pane" id="export">
+			<h1 class="sidebar-header">Export/Import<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+		</div>
 
         <div class="sidebar-pane" id="scotty">
             <h1 class="sidebar-header">Zugverbindungen<span class="sidebar-close"><i class="fas fa-caret-left"></i></span></h1>
@@ -217,19 +277,24 @@
         </div>
 
 		<div class="sidebar-pane" id="settings">
-            <h1 class="sidebar-header">Einstellungen<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p>Gl&uuml;ckwunsch, du hast ein Keks gefunden. Nat&uuml;rlich darfst du ihn behalten. 
-            	<i class="fas fa-cookie"></i>
-            </p>
-            <p>
-            	Cookies löschen? <br>
-            	<input type="button" value="Bestätigen" class="button_input" onclick="resetCookie()"> <br> 
-            </p>
-        </div>
+			<h1 class="sidebar-header">Einstellungen<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+			<h2>Akzentfarbe</h2>
+			<p>Gefällt dir die Farbe nicht? Dann wähl' doch eine andere aus...</p> 
+			<div class="wheel" id="colorWheelDemo"></div>
+			<input type="button" value="Reset" class="button" onclick="resetColor()" style="background-color: #13803e"> 
+			<h2>Cookies</h2> 
+			<p>Gl&uuml;ckwunsch, du hast ein Keks gefunden. Nat&uuml;rlich darfst du ihn behalten. 
+				<i class="fas fa-cookie"></i>
+			</p>
+			<p>Cookies löschen?</p>
+			<input type="button" value="Bestätigen" class="button" onclick="resetCookie()">   
+		</div>
     </div>
     </div>
     <script src="js/data.js"></script>
  	<script src="js/map.js"></script>
+	 <script src="js/colorWheel.js"></script>
+
 </body>
 </html>
 

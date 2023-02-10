@@ -1,3 +1,4 @@
+
 /********************
  * CUSTOM FUNCTIONS *
  ********************/
@@ -11,12 +12,12 @@ function endStartup () {
 		document.cookie = "showStartUp=false; expires=Thu, 31 Dec 2030 23:59:59 UTC; path=/; SameSite=Lax";
 	}
 	
-	document.getElementById("overlay_layer").remove();
-	document.getElementById("overlay_startup").remove();
+	document.getElementById("overlay_bg").remove();
+	document.getElementById("overlay_content").remove();
 }
 
 
-//@function endStartup
+//@function checkCookies
 //Checks if the cookie includes showStartUp-tag and extract its value
 //If true, startup overlay will be shown, otherwise it will be skipped
 //and removed
@@ -29,24 +30,28 @@ function checkCookies() {
 			var state = cookie[i].replace("showStartUp=", "").trim();
 			if (state=="false"){
 				startUpflag = false;
-				break;
+			}
+		}
+		if (cookie[i].includes("color")) {
+			var color = cookie[i].replace("color=", "").trim();
+			if (color!="#13803e"){
+				document.querySelector(':root').style.setProperty('--color_main', color)
 			}
 		}
 	}
 	if (startUpflag) {
-		document.getElementById("overlay_layer").style.visibility = "visible";
-		document.getElementById("overlay_startup").style.visibility = "visible";
+		document.getElementById("overlay_bg").style.visibility = "visible";
+		document.getElementById("overlay_content").style.visibility = "visible";
 	}
 	else if (!startUpflag){
 		endStartup ();
 	}
-
 }
 
 //@function resetCookie
 //Resets the cookie,which causes startup overlay to show again 
 //and notifies the user
 function resetCookie () {
-	document.cookie = "showStartUp=true; expires=Thu, 31 Dec 2030 23:59:59 UTC; path=/";
+	document.cookie = "showStartUp=true; color=#13803e; expires=Thu, 31 Dec 2030 23:59:59 UTC; path=/";
 	alert("Cookie gelöscht!");
 }
