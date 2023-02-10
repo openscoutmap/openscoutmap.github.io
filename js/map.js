@@ -66,9 +66,9 @@ var campside_house = new L.LayerGroup(),
 /*****************
  * SETUP MARKERS *
  *****************/
-var cathegory_types = ["tent", "house", "mixed", "jamboree", "jamborette", "poi"];
-var layer_groups = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette, marker_poi];
-var icon_list = [icon_campside, icon_house, icon_mixed, icon_jamboree, icon_jamborette, icon_poi];
+var cathegory_types = ["tent", "house", "mixed", "jamboree", "jamborette"]
+var layer_groups = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette];
+var icon_list = [icon_campside, icon_house, icon_mixed, icon_jamboree, icon_jamborette];
 
 var entry_id = 1;
 for (elem in list_places){
@@ -104,6 +104,7 @@ var campsides_map = L.map('map', {
 	attributionControl: true,
 	zoomControl: false,
 	measureControl: false,
+	dragging: true,
 	layers: [osm, campside_house,campside_yard, campside_mixed]
 });
 
@@ -227,14 +228,26 @@ function updateSearch(term) {
 //@function searchRadius()
 //Creates/removes draggable search radius and marker on map
 function searchRadius () {
-	var radius = document.getElementById("search-radius").value * 1000;
+	var radius_des = document.getElementById("search-radius").value * 1000;
+	var circle = L.circle(campsides_map.getCenter(), {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5,
+		radius: 500
+	}).addTo(campside_house);
+	/*
+
 	if (marker_circles.getLayers() == 0) {
+		
 		var circle = L.circle(campsides_map.getCenter(), {
 			    color: 'gray',
 			    draggable: true,
+				autoPan: true,
 			    fillOpacity: 0.5,
-			    radius: radius
+			    radius: radius_des
 			}).addTo(marker_circles);
+		
+			console.log(circle);
 
 		var circle_center = L.marker(campsides_map.getCenter(), {
 			draggable: true,
@@ -246,7 +259,7 @@ function searchRadius () {
 	else {
 		document.getElementById("search-status").value = "Ursprung setzen";
 		marker_circles.clearLayers();
-	} 
+	} */
 }
 
 //function setSearchRadius(number radius)
@@ -257,9 +270,9 @@ function setSearchRadius(radius) {
 function setPoi(){
    var poi = L.marker(campsides_map.getCenter(), {
 	   draggable: true,
+	   autoPan: true,
 	   icon : icon_poi
-   }).on('move', function (e) {circle.setLatLng(e.latlng);})
-   .on('dblclick', function (e) {this.remove(); })
+   }).on('dblclick', function (e) {this.remove(); })
    .addTo(marker_poi);
 }
 
