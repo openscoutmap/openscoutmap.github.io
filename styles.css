@@ -5,6 +5,250 @@ blue-dark: #043069;
 green:  #13803e;
 green-dark. #0a4521
 */
+
+/******************
+ * ROOT PROPRTIES *
+ ******************/
+
+ :root {
+  --color_main: #13803e;
+  --color_accent: #043069;
+
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+body, html, input, textarea {
+  font-size: 0.9em;
+  font-family: "Lato", sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 1.3em;
+ }
+
+/*****************************
+ * BASIC STYLING FOR CLASSES *
+ *****************************/
+
+input.button {
+  background-color: var(--color_main);
+  color: #FFF;
+  width: 30%;
+  padding: 2% 0% 2% 0%;
+  margin: 1% 35% 1% 35%;
+  border-radius: 5px; 
+  border-style: none;
+}
+
+input.text_input, textarea.text_input {
+  width: 74%;
+  padding: 3%;
+  margin: 0% 10% 5% 10%;
+  border: hidden;
+  background-color: #EEE;
+}
+
+/*******************
+ * OVERLAY STARTUP *
+ *******************/
+ /*Gray overlay background*/
+#overlay_bg {
+  z-index: 2001;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  opacity: 0.5;
+  visibility: hidden;
+}
+
+/*Container for overlay content*/
+#overlay_content {
+  z-index: 2002;
+  position:  fixed;
+  width: 70%;
+  overflow-y: auto;
+  margin: 5% 15% 5% 15%;
+  background-color: #FFF;
+  text-align: center;
+  visibility: hidden;
+}
+
+/*Container for spacing overlay content*/
+#overlay_content div {
+  margin: 2% 10% 5% 10%;
+}
+
+/*Open Scout Map Title*/
+#overlay_content h1 {
+  letter-spacing: -0.075em;
+  color: var(--color_main);
+  font-variant: small-caps;
+  text-transform: capitalize;
+}
+
+/*List for icon explaining*/
+#overlay_content ul {
+  width: 100%;
+  padding-left: 0;
+  list-style: none;
+  list-style-position: outside;
+  text-align: left;
+  line-height: 200%;
+}
+/*FA icons*/
+#overlay_content i { 
+  color: var(--color_main);
+}
+
+/*Button for escaping from startup overlay */
+#overlay_content input.button {
+  display: block;
+  width: 35%;
+  margin:auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+/***************
+ * MAP STYLING *
+ ***************/
+#map {
+  z-index: 0;
+  width: 100%;
+  height: 100%; 
+}
+
+/*******************
+ * SIDE BAR COLORS *
+ *******************/
+.sidebar-header {
+    background-color: var(--color_main);
+}
+.sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
+ background-color: var(--color_main); 
+}
+
+/****************
+ * HOMEMENU TAB *
+ ****************/
+
+/**************
+ * SEARCH TAB *
+ **************/
+p.searchResult {
+  margin-left: 2%;
+  transition-duration: 0.5s;
+}
+
+p.searchResult:hover {
+  background-color: var(--color_main);
+  color: #FFF;
+  padding: 2%;
+  margin-left: 4%;
+  transition-duration: 0.5s;
+  border-radius: 5px;
+  font-weight: bold; 
+
+}
+
+/**************
+ * FILTER TAB *
+ **************/
+#filter label.chkbx{
+  display: block;
+}
+
+ /**************
+ * ACCOUNT TAB *
+ ***************/
+ #account input.button {
+  min-width: 100px;
+ }
+
+/**************
+ * SCOTTY TAB *
+ **************/
+ #scotty iframe {
+  width: 100%;
+  margin-top: 2%;
+  height: 350px;
+}
+
+/************
+ * HELP TAB *
+ ************/
+
+ #help figure {
+  width: 50%;
+  margin: auto;
+  margin-top: 10%; 
+ }
+
+ #help img {
+  width: 50%;
+  margin: 0 25% 0 25%;
+ }
+ #help figcaption {
+  text-align: center;
+ }
+  
+
+/***************
+ * CONTACT TAB *
+ ***************/
+
+
+ /************
+ * ABOUT TAB *
+ *************/
+#about a  {
+  text-decoration: none;
+  color: var(--color_main);
+}
+#about a:hover  {
+  color: var(--color_accent);
+}
+/***************
+ * SETTINGS TAB *
+ ***************/ 
+.wheel {
+  margin: auto;
+  width: 200px;
+}
+
+input.button {
+  margin-top: 5%;
+}
+
+/****************
+ * MEDIA QUERYS *
+ ****************/
+/*Media Query for narrow screens*/
+ @media (max-width: 500px){
+  #overlay_content{
+    height: 90%;
+    overflow-y: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  #overlay_content li  {
+    padding: 5% 0 5% 0;
+    text-align: center;
+  }
+
+  #overlay_content li > i {
+    display: block;
+    text-align: center;
+  }
+
+ }
 /*Autorotate Screen
 
 @media (orientation: landscape) {
@@ -13,17 +257,9 @@ green-dark. #0a4521
   }
 }
 */
-/*Basic properties*/
-body, html {
-  height: 100%;
-  margin: 0;
-  font-size: 16px;
-  font-family: "Lato", sans-serif;
-  font-weight: 400px;
-  color: #666;
-}
 
 /*Mobile rotation(landscape) warning*/
+ /*
 #m_ls_warn {
   visibility: hidden;
   z-index: 5000;
@@ -33,196 +269,41 @@ body, html {
   width: 100%;
   font-size: 30px;
   text-align: center;
-  background-color: #13803e; 
+  background-color: var(--color_main); 
   color: #FFF;
   padding-top:15%;
 }
 
-/*Map tiles properties*/
-#map {
-  z-index: 0;
-  width: 100%;
-  height: 100%; 
-}
-
-/*CSS for side controls -Pfusch*/
-div.sidebar-left{ 
-  margin-bottom: 2%;
-}
-
-/*Control sidebar - custom background color*/
-.sidebar-header {
-    background-color: #13803e;
-}
-/*Control sidebar - custom background color*/
-.sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
- background-color: #13803e; 
-}
-
-/*About section - reference link styles*/
-div#about a  {
-  text-decoration: none;
-  color: #13803e;
-}
-/*About section - reference link styles*/
-div#about a:hover  {
-  color: #0a4521;
-}
-/*About section - reference link styles*/
-div#about li {
-margin-left: 10%;
-}
-
-/*Contribute section - form - mail input*/
- input.text_input {
-  width: 74%;
-  padding: 3%;
-  margin-bottom: 5%;
-  margin-left: 10%;
-  border: hidden;
-  background-color: #EEE;
-  font-size: 14px;
-  font-family: "Lato", sans-serif;
-  font-weight: 400px;
-}
-/*Contribute section - form - comment input*/
-div#contact textarea.text_input {
-  width: 74%;
-  padding: 3%;
-  margin-bottom: 5%;
-  margin-left: 10%;
-  border: hidden;
-  background-color: #EEE;
-  resize: none; 
-  font-size: 14px;
-  font-family: "Lato", sans-serif;
-  font-weight: 400px;
-
-}
-/*Submit buttons*/
- input.button_input {
-  background-color: #13803e;
-  color: #FFF;
-  width: 26%;
-  padding: 2% 2% 2% 2%;
-  margin-top: 2em;
-  margin-left: 37%;
-  border-radius: 5px; 
-  border-style: none;
-}
-/*Train section - iframe properties*/
-iframe {
-  width: 100%;
-  height: 370px;
-  margin-top: 2%;
-}
-
 /*Train & Contribute section- reference link & contact form hint*/
+ /*
 span.hint {
-  font-size: 10px;
+  font-size: 0.65em;
 }
 
 /*Train & Contribute section - reference link & contact form hint*/
+ /*
 .hint a  {
   text-decoration: none;
-  color: #13803e;
+  color: var(--color_main);
 }
 /*Train & Contribute section - reference link & contact form hint*/
+  /*/*
 .hint a:hover  {
-  color: #0c8038;
+  color: var(--color_accent);
 }
 
 
-/*Startup Overlay - Container settings*/
-div.textOverlay {
-  z-index: 2002;
-  position:  fixed; 
-  float: left;  
-  height: 100%;
-  width: 100%;
- /* visibility: hidden;*/
+/*Autorotate Screen
 
+@media (orientation: landscape) {
+  #m_ls_warn {
+  visibility: visible !important;
+  }
 }
+*/
+/*
 
-/*Startup Overlay - Heading*/
-div.textOverlay #headerTitle{
-  font-family: "Lato", sans-serif;
-  font-size: 25px;
-  letter-spacing: -1.2px;
-  color: #13803e;
-  font-weight: 700;
-  font-variant: small-caps;
-  text-transform: capitalize;
-  padding-bottom: 5%;
-}
-
-
-/*Startup Overlay - Submit Button*/
-div.textOverlay input {
-  margin: 0;
-  margin-top: 5%;
-}
-
-
-/*Startup Overlay - Paragraph and text*/
-div.textOverlay p {
-  text-align: center;
-  margin: auto; 
-  width: 50%;
-  margin-top: 5%;
-  background-color: #FFF;
-  padding: 5% 10% 2% 10%;
-}
-div.textOverlay p.infos {
-  text-align: left;
-  margin-top: 0%;
-  padding: 0% 10% 0% 10%;
-  line-height: 200%;
-}
-
-div.textOverlay p.interact {
-  text-align: center;
-  margin-top: 0%;
-  padding: 0% 10% 5% 10%;
-
-}
-
-
-#overlay_startup {
-  overflow: auto;
-}
-
-/*Startup Overlay - Dark Background*/
-#overlay_layer {
-  z-index: 2001;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: #111;
-  opacity: 0.5;
-/*  visibility: hidden;*/
-}
-
-span.login_header {
-  margin: auto; 
-  width: 50%;
-  background-color: green;
-}
-
-img.map_icon {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: 5em;
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-
-td {
-    width: 30%;
-  vertical-align: center;
-  text-align: center;
-}
+LEGACY CODE - RENEWED CODE ABOVE
 p.searchResult {
   padding-top: 1em;
   padding-bottom: 1em;
@@ -242,3 +323,4 @@ p.searchResult:hover {
   from {padding-left: 0em;}
   to {padding-left: 2em;}
 }
+*/

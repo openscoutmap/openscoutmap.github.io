@@ -9,14 +9,19 @@
  	<link rel="stylesheet" href="leaflet-measure/leaflet-measure.css" type="text/css">
  	<link rel="stylesheet" href="sidebar-v2/css/leaflet-sidebar.css" type="text/css">
 	<link rel="stylesheet" href="fa/css/all.min.css"  type="text/css">
+    <link rel="stylesheet" href="easybutton/easy-button.css"  type="text/css">
 	<link rel="stylesheet" href="styles.css" type="text/css">
 
 
  	<script src="leaflet/leaflet.js"></script>
  	<script src="leaflet-measure/leaflet-measure.js"></script>
 	<script src="sidebar-v2/js/leaflet-sidebar.js"></script>
-	<script src="fuse/fuse.min.js"></script> <!--fuse/dist/fuse.js -->
+	<script src="fuse/fuse.min.js"></script> 
+	<script src="color/mainScript.js"></script>
+    <script src="easybutton/easy-button.js"></script>
 	<script src="https://fahrplan.oebb.at/webapp/staticfiles/hafas-widget-core.1.0.0.js?language=de_DE"></script>
+
+
 
  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -25,7 +30,7 @@
  </head>
 
 <body onload="checkCookies()">
-	<div id="m_ls_warn">Bitte das Gerät drehen/Please rotate your device</div>
+	<!--<div id="m_ls_warn">Bitte das Gerät drehen/Please rotate your device</div>-->
 	<div id="overlay_bg"></div >
 		<section id="overlay_content">
 			<div> 
@@ -87,7 +92,7 @@
             	</ul>
 				<img id="campside_img "style="background-color: aqua;" id="campside_img" src="">
             	In anderer Karte anzeigen:
-            	<input type="submit"  class = "button_input" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
+            	<input type="submit"  class = "button" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
             </p> 
         </div>
 
@@ -170,7 +175,7 @@
             	<form id="account_login">
 	            <input type="text" name="user_name" class="text_input" placeholder="E-Mail Adresse">
     	        <input type="password" name="user_passwd" class="text_input" placeholder="Password">
-            	<input type="submit" class = "button_input" value="Anmelden" name="button_submit"> 
+            	<input type="submit" class = "button" value="Anmelden" name="button_submit"> 
             </form>
             </p>
             <p>
@@ -178,7 +183,7 @@
             	Du bist noch nicht registriert? Dann hinterlasse hier deine Email-Adresse und du bekommst Anmeldedaten zugesendet.
             	<form id="account_register">
 		            <input type="text" name="user_name_new" class="text_input" placeholder="E-Mail Adresse">
-		            <input type="submit" class = "button_input" value="Registieren" name="button_submit"> 
+		            <input type="submit" class = "button" value="Registieren" name="button_submit"> 
             	</form>
        	 	</p>
 
@@ -243,7 +248,7 @@
             	
             	 <textarea class = "text_input" placeholder="Kommentarfeld" name="comment" rows="10" cols="50"></textarea>
             	<input type="text" class="text_input" placeholder="E-Mail Adresse*" name="name">
-            	<input type="submit" class = "button_input" value="Absenden" name="button_submit"> 
+            	<input type="submit" class = "button" value="Absenden" name="button_submit"> 
             	<br>
             	<span class="hint">*Wenn du keine Rückmeldung erwartest, dann das betreffende Feld leer. </span>
             </form>               	
@@ -293,7 +298,7 @@
     </div>
     <script src="js/data.js"></script>
  	<script src="js/map.js"></script>
-	 <script src="js/colorWheel.js"></script>
+	<script src="js/colorWheel.js"></script>
 
 </body>
 </html>

@@ -51,6 +51,8 @@ var icon_mixed = new tmpl_icon({'iconUrl':'icons/mixed_icon.png'});
 var icon_jamboree = new tmpl_icon({'iconUrl':'icons/jamboree_icon.png'});
 var icon_jamborette = new tmpl_icon({'iconUrl':'icons/jamborette_icon.png'});
 var icon_poi = new tmpl_icon({'iconUrl':'icons/poi_icon.png'});
+var icon_circle = new tmpl_icon({'iconUrl':'icons/circle_icon.png'});
+
 
 //Init icon layer groups
 var campside_house = new L.LayerGroup(),
@@ -58,13 +60,14 @@ var campside_house = new L.LayerGroup(),
 	campside_mixed = new L.LayerGroup(),
 	campsite_jamboree = new L.LayerGroup(),
 	campsite_jamborette = new L.LayerGroup(),
-	poi = new L.LayerGroup();
+	marker_circles = new L.LayerGroup(),
+	marker_poi = new L.LayerGroup();
 
 /*****************
  * SETUP MARKERS *
  *****************/
 var cathegory_types = ["tent", "house", "mixed", "jamboree", "jamborette", "poi"];
-var layer_groups = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette, poi];
+var layer_groups = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette, marker_poi];
 var icon_list = [icon_campside, icon_house, icon_mixed, icon_jamboree, icon_jamborette, icon_poi];
 
 var entry_id = 1;
@@ -110,6 +113,9 @@ L.control.layers(baseLayers,overlays, {
 	position:'topright'
 }).addTo(campsides_map);
 
+//Add special marker layers to map
+campsides_map.addLayer(marker_circles);
+campsides_map.addLayer(marker_poi);
 
 //Create and add zoom controls 
 L.control.zoom({
@@ -218,3 +224,53 @@ function updateSearch(term) {
 	document.getElementById("search_results").innerHTML = answer;
 }
 
+//@function searchRadius()
+//Creates/removes draggable search radius and marker on map
+function searchRadius () {
+	var radius = document.getElementById("search-radius").value * 1000;
+	if (marker_circles.getLayers() == 0) {
+		var circle = L.circle(campsides_map.getCenter(), {
+			    color: 'gray',
+			    draggable: true,
+			    fillOpacity: 0.5,
+			    radius: radius
+			}).addTo(marker_circles);
+
+		var circle_center = L.marker(campsides_map.getCenter(), {
+			draggable: true,
+			icon : icon_circle
+		}).on('move', function (e) {circle.setLatLng(e.latlng);})
+		.addTo(marker_circles);
+	document.getElementById("search-status").value = "Ursprung entfernen";
+	}
+	else {
+		document.getElementById("search-status").value = "Ursprung setzen";
+		marker_circles.clearLayers();
+	} 
+}
+
+//function setSearchRadius(number radius)
+function setSearchRadius(radius) {
+	marker_circles.getLayers()[0].setRadius(radius* 1000);
+   }
+
+function setPoi(){
+   var poi = L.marker(campsides_map.getCenter(), {
+	   draggable: true,
+	   icon : icon_poi
+   }).on('move', function (e) {circle.setLatLng(e.latlng);})
+   .on('dblclick', function (e) {this.remove(); })
+   .addTo(marker_poi);
+}
+
+function deleteAllPoi() {
+   marker_poi.clearLayers()
+}
+
+var home = {
+ lat: 70.3,
+ lng: 50.5,
+ zoom: 8
+}; 
+
+L.easyButton('fa-home').addTo(campsides_map);
