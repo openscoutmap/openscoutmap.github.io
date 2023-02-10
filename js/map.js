@@ -119,6 +119,8 @@ L.control.layers(baseLayers, overlays, {
 //Add special marker layers to map
 campsides_map.addLayer(marker_circles);
 campsides_map.addLayer(marker_poi);
+geoJSONLayer = L.geoJSON().addTo(campsides_map);
+
 
 //Create and add zoom controls 
 L.control.zoom({
@@ -270,20 +272,37 @@ function setSearchRadius(radius) {
 	marker_circles.getLayers()[0].setRadius(radius * 1000);
 }
 
+var poiCounter = 1;
 function setPoi() {
+
+	var labelTxt = document.getElementById("label_new_poi").value;
+	if (labelTxt == "")
+		labelTxt = "POI " + poiCounter;
 	var poi = L.marker(campsides_map.getCenter(), {
 		draggable: true,
 		autoPan: true,
 		icon: icon_poi
-	}).bindPopup(document.getElementById("label_new_poi").value)
+	}).bindPopup(labelTxt)
 	.on('mouseover', function (e) { this.openPopup(); })
 	.on('mouseout', function (e) { this.closePopup(); })
 	.on('dblclick', function (e) { this.remove(); })
 	.addTo(marker_poi);
+	poiCounter++;
 }
 
 function deleteAllPoi() {
-	marker_poi.clearLayers()
+	marker_poi.clearLayers();
+	poiCounter = 1;
+}
+
+function updateStateHighlight(state) {
+	geoJSONLayer.clearLayers();
+	var states_codes = [ "vab", "trl", "vie", "ooe", "noe", "stm", "sbg", "ktn", "bgl"];
+	if (state != "all"){
+		var index = states_codes.indexOf(state);
+		geoJSONLayer.addData(state_geojson.features[index]);
+	}
+	
 }
 
 var home = {

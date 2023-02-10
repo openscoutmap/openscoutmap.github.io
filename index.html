@@ -117,8 +117,10 @@
             <div class="sidebar-pane" id="filter">
                 <h1 class="sidebar-header">Filter<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <h2>Lagerplatz Typ</h2>
+                
                 <form name=filter>
+                    <!--
+                    <h2>Lagerplatz Typ</h2>
                     <label class="chkbx" for="Test1">
                         <input type="checkbox" name="checkbox1" name="Test1">Pfadfinderheim
                     </label>
@@ -127,11 +129,12 @@
                     </label>
                     <label class="chkbx" for="Test3">
                         <input type="checkbox" name="checkbox1" name="Test3">Hybrid
-                    </label>
+                    </label>-->
 
                     <h2>Geografische Lage</h2>
                     <label for="fedStates">Bundesländer</label>
-                    <select name="fedStates">
+                    <select onchange="updateStateHighlight(this.value)" name="fedStates">
+                        <option value="all">Alle</option>
                         <option value="bgl">Burgenland</option>
                         <option value="ktn">Kärnten</option>
                         <option value="noe">Niederösterreich</option>
@@ -297,7 +300,8 @@
                     <li><a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></li>
                     <li><a href="https://leafletjs.com/" target="_blank">LeafletJS</a></li>
                     <li><a href="https://github.com/Turbo87/sidebar-v2" target="_blank">Sidebar V2</a></li>
-                    <li><a href="https://github.com/ljagis/leaflet-measure" target="_blank">Leaftlet-measure</a></li>
+                    <li><a href="https://github.com/ginseng666/GeoJSON-TopoJSON-Austria" target="_blank">geoJSON for Austria</a></li>
+                    <li><a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></li>
                     <li><a href="https://fontawesome.com" target="_blank">FontAwesome</a></li>
                     <li><a href="https://fusejs.io/" target="_blank">FuseJS</a></li>
                     <li><a href="https://fontawesome.com/cheatsheet" target="_blank">FontAwesome CheatSheat</a></li>
@@ -327,6 +331,8 @@
     <script src="js/data.js"></script>
     <script src="js/map.js"></script>
     <script src="js/colorWheel.js"></script>
+    <script src="js/geojson.js"></script>
+
     <script>
         updateSidebar(1,0,0);
                 

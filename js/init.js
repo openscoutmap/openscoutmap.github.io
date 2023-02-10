@@ -34,6 +34,7 @@ function checkCookies() {
 		}
 		if (cookie[i].includes("color")) {
 			var color = cookie[i].replace("color=", "").trim();
+			var newColor = color;
 			if (color != "#13803e") {
 				document.querySelector(':root').style.setProperty('--color_main', color)
 			}
