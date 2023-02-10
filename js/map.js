@@ -12,21 +12,21 @@ opnv_source = 'http://tile.memomaps.de/tilegen/{z}/{x}/{y}.png';
 osm_attrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors CC-BY-SA';
 opentopo_attrib = 'Kartendaten:' + osm_attrib + ' | Kartendarstellung: &copy;  <a href="https://opentopomap.org/about">OpenTopoMap</a> CC-BY-SA';
 satellit_attrib = 'Map data &copy; Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-opnv_attrib = '<a href="https://memomaps.de/" > MeMoMaps</a> CC-BY-SA | '+ osm_attrib;
+opnv_attrib = '<a href="https://memomaps.de/" > MeMoMaps</a> CC-BY-SA | ' + osm_attrib;
 
 //Init map tile layers
-var osm = L.tileLayer(osm_source, { maxZoom: 17, attribution:  osm_attrib}); 
-var opentopo = L.tileLayer(opentopo_source, { maxZoom: 17, attribution:  opentopo_attrib}); 
-var satellit = L.tileLayer(satellit_source, { maxZoom: 17, attribution:  satellit_attrib});
-var opnv = L.tileLayer(opnv_source, { maxZoom: 17, attribution:  opnv_attrib});
+var osm = L.tileLayer(osm_source, { maxZoom: 17, attribution: osm_attrib });
+var opentopo = L.tileLayer(opentopo_source, { maxZoom: 17, attribution: opentopo_attrib });
+var satellit = L.tileLayer(satellit_source, { maxZoom: 17, attribution: satellit_attrib });
+var opnv = L.tileLayer(opnv_source, { maxZoom: 17, attribution: opnv_attrib });
 
 //Combine map tile layer ins one dict
-var baseLayers = { 
-	"OpenStreetMap": osm, 
-	"Open Topo": opentopo, 
+var baseLayers = {
+	"OpenStreetMap": osm,
+	"Open Topo": opentopo,
 	"Satellit": satellit,
-	"ÖPNV": opnv 
-}; 
+	"ÖPNV": opnv
+};
 
 /***************
  * SETUP ICONS *
@@ -35,28 +35,28 @@ var baseLayers = {
 //Create Template Icon Class
 var tmpl_icon = L.Icon.extend({
 	options: {
-		iconUrl:"foo.png",
-	    iconSize: [33, 47],
-	    iconAnchor: [16, 47],
-	    popupAnchor:  [0, -50],
-	    draggable: false,
-	    riseOnHover: true
-    }
+		iconUrl: "foo.png",
+		iconSize: [33, 47],
+		iconAnchor: [16, 47],
+		popupAnchor: [0, -50],
+		draggable: false,
+		riseOnHover: true
+	}
 });
 
 //Init three instances of class template icon 
-var icon_campside = new tmpl_icon({'iconUrl':'icons/tent_icon.png'});
-var icon_house = new tmpl_icon({'iconUrl':'icons/house_icon.png'});
-var icon_mixed = new tmpl_icon({'iconUrl':'icons/mixed_icon.png'});
-var icon_jamboree = new tmpl_icon({'iconUrl':'icons/jamboree_icon.png'});
-var icon_jamborette = new tmpl_icon({'iconUrl':'icons/jamborette_icon.png'});
-var icon_poi = new tmpl_icon({'iconUrl':'icons/poi_icon.png'});
-var icon_circle = new tmpl_icon({'iconUrl':'icons/circle_icon.png'});
+var icon_campside = new tmpl_icon({ 'iconUrl': 'icons/tent_icon.png' });
+var icon_house = new tmpl_icon({ 'iconUrl': 'icons/house_icon.png' });
+var icon_mixed = new tmpl_icon({ 'iconUrl': 'icons/mixed_icon.png' });
+var icon_jamboree = new tmpl_icon({ 'iconUrl': 'icons/jamboree_icon.png' });
+var icon_jamborette = new tmpl_icon({ 'iconUrl': 'icons/jamborette_icon.png' });
+var icon_poi = new tmpl_icon({ 'iconUrl': 'icons/poi_icon.png' });
+var icon_circle = new tmpl_icon({ 'iconUrl': 'icons/circle_icon.png' });
 
 
 //Init icon layer groups
 var campside_house = new L.LayerGroup(),
-    campside_yard = new L.LayerGroup(),
+	campside_yard = new L.LayerGroup(),
 	campside_mixed = new L.LayerGroup(),
 	campsite_jamboree = new L.LayerGroup(),
 	campsite_jamborette = new L.LayerGroup(),
@@ -71,25 +71,25 @@ var layer_groups = [campside_yard, campside_house, campside_mixed, campsite_jamb
 var icon_list = [icon_campside, icon_house, icon_mixed, icon_jamboree, icon_jamborette];
 
 var entry_id = 1;
-for (elem in list_places){
+for (elem in list_places) {
 	var index = cathegory_types.indexOf(list_places[elem].cathegory);
 	list_places[elem].id = entry_id;
 
-	L.marker([list_places[elem].coords.lat, list_places[elem].coords.lng], 
-		{icon : icon_list[index], alt : entry_id})
-	.bindPopup(list_places[elem].name)
-	.on('mouseover', function (e) {this.openPopup(); })
-	.on('mouseout', function (e) {this.closePopup(); })
-	.on('click',   function(e) { updateSidebar(this._icon.alt,1);}) //this._popup._content//replace by this.sourcetarget.options.alt
-	.addTo(layer_groups[index]);
+	L.marker([list_places[elem].coords.lat, list_places[elem].coords.lng],
+		{ icon: icon_list[index], alt: entry_id })
+		.bindPopup(list_places[elem].name)
+		.on('mouseover', function (e) { this.openPopup(); })
+		.on('mouseout', function (e) { this.closePopup(); })
+		.on('click', function (e) { updateSidebar(this._icon.alt, 1); }) //this._popup._content//replace by this.sourcetarget.options.alt
+		.addTo(layer_groups[index]);
 	entry_id++;
 }
 
 //Create dicts for control box
 var overlays = {
-	"Lagerplatz mit Haus: " : campside_house,
-	"Lagerplatz mit Zeltplatz" : campside_yard,
-	"Mixed" : campside_mixed,
+	"Lagerplatz mit Haus: ": campside_house,
+	"Lagerplatz mit Zeltplatz": campside_yard,
+	"Mixed": campside_mixed,
 };
 
 /**************************************
@@ -105,13 +105,13 @@ var campsides_map = L.map('map', {
 	zoomControl: false,
 	measureControl: false,
 	dragging: true,
-	layers: [osm, campside_house,campside_yard, campside_mixed]
+	layers: [osm, campside_house, campside_yard, campside_mixed]
 });
 
 //Add layers to map 
-L.control.layers(baseLayers,overlays, {
+L.control.layers(baseLayers, overlays, {
 	collapsed: true,
-	position:'topright'
+	position: 'topright'
 }).addTo(campsides_map);
 
 //Add special marker layers to map
@@ -120,7 +120,7 @@ campsides_map.addLayer(marker_poi);
 
 //Create and add zoom controls 
 L.control.zoom({
-     position:'topright'
+	position: 'topright'
 }).addTo(campsides_map);
 
 //Create and add scale controls
@@ -134,15 +134,16 @@ L.control.measure({
 	position: 'topright',
 	activeColor: '#fc5e03',
 	completedColor: '#fc0303',
-	primaryLengthUnit: 'meters', 
+	primaryLengthUnit: 'meters',
 	secondaryLengthUnit: 'kilometers',
 	primaryAreaUnit: 'sqmeters',
 	secondaryAreaUnit: undefined
 }).addTo(campsides_map);
 
 //Create and add left sidebar
-var lft_sidebar = L.control.sidebar('sidebar' , {
-	position: 'left'});
+var lft_sidebar = L.control.sidebar('sidebar', {
+	position: 'left'
+});
 lft_sidebar.addTo(campsides_map);
 
 /***********************
@@ -151,13 +152,13 @@ lft_sidebar.addTo(campsides_map);
 
 //Define options for fuse search
 var options = {
-   	isCaseSensitive: false,
+	isCaseSensitive: false,
 	includeScore: true,
-   	shouldSort: true,
-   	findAllMatches: true,
-    minMatchCharLength: 3,
-    threshold: 0.5,
-  	keys: ["name", "tag", "postal code", "state", "country"]
+	shouldSort: true,
+	findAllMatches: true,
+	minMatchCharLength: 3,
+	threshold: 0.5,
+	keys: ["name", "tag", "postal code", "state", "country"]
 };
 
 //Init fuse search
@@ -169,11 +170,11 @@ var fuse = new Fuse(list_places, options);
 
 //Add pan effect to map in case left sidebar is opened
 lft_sidebar.on('opening', function () {
-	campsides_map.panBy([-200,0],{duration: 0.5});
+	campsides_map.panBy([-200, 0], { duration: 0.5 });
 });
 //Add pan effect to map in case left sidebar is closed
 lft_sidebar.on('closing', function () {
-	campsides_map.panBy([200,0],{duration: 0.5});
+	campsides_map.panBy([200, 0], { duration: 0.5 });
 });
 
 /********************
@@ -182,12 +183,12 @@ lft_sidebar.on('closing', function () {
 
 //@function updateSidebar (String cs_name, Int prev_state{0,1})
 //Update Sidebar after marker onclick-event 
-function updateSidebar (index,prev_state) {
+function updateSidebar(index, prev_state) {
 	var cur_entry = list_places[--index];
 	console.log(cur_entry);
-	
-	if (prev_state==0)
-		campsides_map.flyTo([cur_entry.coords.lat,cur_entry.coords.lng],campsides_map.getZoom(),{duration: 2});
+
+	if (prev_state == 0)
+		campsides_map.flyTo([cur_entry.coords.lat, cur_entry.coords.lng], campsides_map.getZoom(), { duration: 2 });
 
 	lft_sidebar.open('home');
 	document.getElementById("campside_name").innerHTML = cur_entry.name;
@@ -198,7 +199,7 @@ function updateSidebar (index,prev_state) {
 	document.getElementById("campside_addr3").innerHTML = cur_entry.state + " - " + cur_entry.country;
 	document.getElementById("campside_koords").innerHTML = cur_entry.coords.lat + " " + cur_entry.coords.lng;
 	document.getElementById("campside_tags").innerHTML = "Tags: " + cur_entry.tag;
-	document.getElementById("campside_img").src  = "./img-entries/logo_bzw.png"; //"img-entries/" + cur_entry.imgsrc;
+	document.getElementById("campside_img").src = "./img-entries/logo_bzw.png"; //"img-entries/" + cur_entry.imgsrc;
 
 	console.log("img-entries/" + cur_entry.imgsrc);
 }
@@ -207,7 +208,7 @@ function updateSidebar (index,prev_state) {
 //Open a new tab with Google Maps pointing towards the coords of the current location 
 function openInMaps() {
 	var coords_cur = document.getElementById("campside_koords").innerHTML;
-	
+
 	coords_cur = coords_cur.split(" ");
 	console.log(coords_cur);
 	window.open("https://www.google.com/maps/place/" + coords_cur[0] + "\°N" + coords_cur[1] + "\°E", '_blank');
@@ -218,16 +219,16 @@ function openInMaps() {
 function updateSearch(term) {
 	var answer = "";
 	var results = fuse.search(term)
-	
+
 	for (i in results) {
-		answer = answer +  "<p id=\" "+ results[i].item.id +" \" class=\"searchResult\" onclick=\"updateSidebar(this.id,0)\" >" + results[i].item.name+ "</p> ";
+		answer = answer + "<p id=\" " + results[i].item.id + " \" class=\"searchResult\" onclick=\"updateSidebar(this.id,0)\" >" + results[i].item.name + "</p> ";
 	}
 	document.getElementById("search_results").innerHTML = answer;
 }
 
 //@function searchRadius()
 //Creates/removes draggable search radius and marker on map
-function searchRadius () {
+function searchRadius() {
 	var radius_des = document.getElementById("search-radius").value * 1000;
 	var circle = L.circle(campsides_map.getCenter(), {
 		color: 'red',
@@ -240,11 +241,11 @@ function searchRadius () {
 	if (marker_circles.getLayers() == 0) {
 		
 		var circle = L.circle(campsides_map.getCenter(), {
-			    color: 'gray',
-			    draggable: true,
+				color: 'gray',
+				draggable: true,
 				autoPan: true,
-			    fillOpacity: 0.5,
-			    radius: radius_des
+				fillOpacity: 0.5,
+				radius: radius_des
 			}).addTo(marker_circles);
 		
 			console.log(circle);
@@ -264,26 +265,26 @@ function searchRadius () {
 
 //function setSearchRadius(number radius)
 function setSearchRadius(radius) {
-	marker_circles.getLayers()[0].setRadius(radius* 1000);
-   }
+	marker_circles.getLayers()[0].setRadius(radius * 1000);
+}
 
-function setPoi(){
-   var poi = L.marker(campsides_map.getCenter(), {
-	   draggable: true,
-	   autoPan: true,
-	   icon : icon_poi
-   }).on('dblclick', function (e) {this.remove(); })
-   .addTo(marker_poi);
+function setPoi() {
+	var poi = L.marker(campsides_map.getCenter(), {
+		draggable: true,
+		autoPan: true,
+		icon: icon_poi
+	}).on('dblclick', function (e) { this.remove(); })
+		.addTo(marker_poi);
 }
 
 function deleteAllPoi() {
-   marker_poi.clearLayers()
+	marker_poi.clearLayers()
 }
 
 var home = {
- lat: 70.3,
- lng: 50.5,
- zoom: 8
-}; 
+	lat: 70.3,
+	lng: 50.5,
+	zoom: 8
+};
 
 L.easyButton('fa-home').addTo(campsides_map);

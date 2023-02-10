@@ -10,18 +10,22 @@ green-dark. #0a4521
  * ROOT PROPRTIES *
  ******************/
 
- :root {
+:root {
   --color_main: #13803e;
   --color_accent: #043069;
 
 }
 
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
 }
 
-body, html, input, textarea {
+body,
+html,
+input,
+textarea {
   font-size: 0.9em;
   font-family: "Lato", sans-serif;
   font-weight: normal;
@@ -29,7 +33,7 @@ body, html, input, textarea {
 
 h2 {
   font-size: 1.3em;
- }
+}
 
 /*****************************
  * BASIC STYLING FOR CLASSES *
@@ -41,11 +45,12 @@ input.button {
   width: 30%;
   padding: 2% 0% 2% 0%;
   margin: 1% 35% 1% 35%;
-  border-radius: 5px; 
+  border-radius: 5px;
   border-style: none;
 }
 
-input.text_input, textarea.text_input {
+input.text_input,
+textarea.text_input {
   width: 74%;
   padding: 3%;
   margin: 0% 10% 5% 10%;
@@ -56,7 +61,7 @@ input.text_input, textarea.text_input {
 /*******************
  * OVERLAY STARTUP *
  *******************/
- /*Gray overlay background*/
+/*Gray overlay background*/
 #overlay_bg {
   z-index: 2001;
   position: fixed;
@@ -70,7 +75,7 @@ input.text_input, textarea.text_input {
 /*Container for overlay content*/
 #overlay_content {
   z-index: 2002;
-  position:  fixed;
+  position: fixed;
   width: 70%;
   overflow-y: auto;
   margin: 5% 15% 5% 15%;
@@ -101,8 +106,9 @@ input.text_input, textarea.text_input {
   text-align: left;
   line-height: 200%;
 }
+
 /*FA icons*/
-#overlay_content i { 
+#overlay_content i {
   color: var(--color_main);
 }
 
@@ -110,7 +116,7 @@ input.text_input, textarea.text_input {
 #overlay_content input.button {
   display: block;
   width: 35%;
-  margin:auto;
+  margin: auto;
   margin-top: 2%;
   margin-bottom: 2%;
 }
@@ -121,17 +127,19 @@ input.text_input, textarea.text_input {
 #map {
   z-index: 0;
   width: 100%;
-  height: 100%; 
+  height: 100%;
 }
 
 /*******************
  * SIDE BAR COLORS *
  *******************/
 .sidebar-header {
-    background-color: var(--color_main);
+  background-color: var(--color_main);
 }
-.sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
- background-color: var(--color_main); 
+
+.sidebar-tabs>li.active,
+.sidebar-tabs>ul>li.active {
+  background-color: var(--color_main);
 }
 
 /****************
@@ -153,28 +161,28 @@ p.searchResult:hover {
   margin-left: 4%;
   transition-duration: 0.5s;
   border-radius: 5px;
-  font-weight: bold; 
+  font-weight: bold;
 
 }
 
 /**************
  * FILTER TAB *
  **************/
-#filter label.chkbx{
+#filter label.chkbx {
   display: block;
 }
 
- /**************
+/**************
  * ACCOUNT TAB *
  ***************/
- #account input.button {
+#account input.button {
   min-width: 100px;
- }
+}
 
 /**************
  * SCOTTY TAB *
  **************/
- #scotty iframe {
+#scotty iframe {
   width: 100%;
   margin-top: 2%;
   height: 350px;
@@ -184,39 +192,42 @@ p.searchResult:hover {
  * HELP TAB *
  ************/
 
- #help figure {
+#help figure {
   width: 50%;
   margin: auto;
-  margin-top: 10%; 
- }
+  margin-top: 10%;
+}
 
- #help img {
+#help img {
   width: 50%;
   margin: 0 25% 0 25%;
- }
- #help figcaption {
+}
+
+#help figcaption {
   text-align: center;
- }
-  
+}
+
 
 /***************
  * CONTACT TAB *
  ***************/
 
 
- /************
+/************
  * ABOUT TAB *
  *************/
-#about a  {
+#about a {
   text-decoration: none;
   color: var(--color_main);
 }
-#about a:hover  {
+
+#about a:hover {
   color: var(--color_accent);
 }
+
 /***************
  * SETTINGS TAB *
- ***************/ 
+ ***************/
 .wheel {
   margin: auto;
   width: 200px;
@@ -230,25 +241,26 @@ input.button {
  * MEDIA QUERYS *
  ****************/
 /*Media Query for narrow screens*/
- @media (max-width: 500px){
-  #overlay_content{
+@media (max-width: 500px) {
+  #overlay_content {
     height: 90%;
     overflow-y: auto;
     margin-top: 5%;
     margin-bottom: 5%;
   }
 
-  #overlay_content li  {
+  #overlay_content li {
     padding: 5% 0 5% 0;
     text-align: center;
   }
 
-  #overlay_content li > i {
+  #overlay_content li>i {
     display: block;
     text-align: center;
   }
 
- }
+}
+
 /*Autorotate Screen
 
 @media (orientation: landscape) {
@@ -259,7 +271,7 @@ input.button {
 */
 
 /*Mobile rotation(landscape) warning*/
- /*
+/*
 #m_ls_warn {
   visibility: hidden;
   z-index: 5000;
@@ -275,19 +287,19 @@ input.button {
 }
 
 /*Train & Contribute section- reference link & contact form hint*/
- /*
+/*
 span.hint {
   font-size: 0.65em;
 }
 
 /*Train & Contribute section - reference link & contact form hint*/
- /*
+/*
 .hint a  {
   text-decoration: none;
   color: var(--color_main);
 }
 /*Train & Contribute section - reference link & contact form hint*/
-  /*/*
+/*/*
 .hint a:hover  {
   color: var(--color_accent);
 }

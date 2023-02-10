@@ -1,305 +1,325 @@
 <!DOCTYPE html>
 <html>
-<head>	
-	<meta charset="utf-8">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-  	<meta name="author" content="Sir Knival">
-	<title>OpenScoutMap</title>
-	<link rel="stylesheet" href="leaflet/leaflet.css" type="text/css">
- 	<link rel="stylesheet" href="leaflet-measure/leaflet-measure.css" type="text/css">
- 	<link rel="stylesheet" href="sidebar-v2/css/leaflet-sidebar.css" type="text/css">
-	<link rel="stylesheet" href="fa/css/all.min.css"  type="text/css">
-    <link rel="stylesheet" href="easybutton/easy-button.css"  type="text/css">
-	<link rel="stylesheet" href="styles.css" type="text/css">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="author" content="Sir Knival">
+    <title>OpenScoutMap</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css" type="text/css">
+    <link rel="stylesheet" href="leaflet-measure/leaflet-measure.css" type="text/css">
+    <link rel="stylesheet" href="sidebar-v2/css/leaflet-sidebar.css" type="text/css">
+    <link rel="stylesheet" href="fa/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="easybutton/easy-button.css" type="text/css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
 
 
- 	<script src="leaflet/leaflet.js"></script>
- 	<script src="leaflet-measure/leaflet-measure.js"></script>
-	<script src="sidebar-v2/js/leaflet-sidebar.js"></script>
-	<script src="fuse/fuse.min.js"></script> 
-	<script src="color/mainScript.js"></script>
+    <script src="leaflet/leaflet.js"></script>
+    <script src="leaflet-measure/leaflet-measure.js"></script>
+    <script src="sidebar-v2/js/leaflet-sidebar.js"></script>
+    <script src="fuse/fuse.min.js"></script>
+    <script src="color/mainScript.js"></script>
     <script src="easybutton/easy-button.js"></script>
-	<script src="https://fahrplan.oebb.at/webapp/staticfiles/hafas-widget-core.1.0.0.js?language=de_DE"></script>
+    <script src="https://fahrplan.oebb.at/webapp/staticfiles/hafas-widget-core.1.0.0.js?language=de_DE"></script>
 
 
 
- 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
- 	<script src="js/init.js"></script>
+    <script src="js/init.js"></script>
 
- </head>
+</head>
 
 <body onload="checkCookies()">
-	<!--<div id="m_ls_warn">Bitte das Gerät drehen/Please rotate your device</div>-->
-	<div id="overlay_bg"></div >
-		<section id="overlay_content">
-			<div> 
-				<h1>OpenScoutMap</h1> 
-				<h3>Wichtigsten Funktionen des Tools</h3>      
-				<ul>
-					<li><i class="fas fa-bars"></i> Hier werden die Info anzeigt. Einfach dafür auf einen Marker klicken</li>
-					<li><i class="fas fa-filter"></i> Hier kannst du in Zunkuft mal nach bestimmten Kriterien filtern</li>
-					<li><i class="fas fa-train"></i> Hier kannst du deine öffentliche Anreise schon mal planen</li>
-					<li><i class="fas fa-envelope"></i> Hier kannst du mit mir in Kontakt treten</li>
-					<li><i class="fas fa-info-circle"></i> Hier versteckt sich der heilige Gral</li>
-					<li>Findest du das versteckte Cookie?</li>
-				</ul>
-				<form >
-					<input type="button" name="buttonStart" value="Starten" class="button" onclick="endStartup()">  
-					<input type="checkbox" name="ov_cb" value="false" id="showStartupAgain"> 
-					<label for="ov_cb"class ="hint">Du willst die Einführung nicht wieder sehen? Einfach einen Haken setzen!</label>
-				</form>
-			</div>
-		</section>
-
-	<div id="map"></div>
-	<div id="sidebar" class="sidebar collapsed">
-    
-    <!-- Nav tabs -->
-    <div class="sidebar-tabs">
-        <ul role="tablist">
-            <li><a href="#home" role="tab"><i class="fas fa-map-marked"></i></a></li>
-            <li><a href="#search" role="tab"><i class="fas fa-search"></i></a></li>
-            <li><a href="#filter" role="tab"><i class="fas fa-filter"></i></a></li>
-            <li><a href="#account" role="tab"><i class="fas fa-user"></i></a></li>
-            <li><a href="#scotty" role="tab"><i class="fas fa-train"></i></a></li>
-            <li><a href="#help" role="tab"><i class="fas fa-question"></i></a></li>
-        </ul>
-
-		<ul role="tablist">
-			<li><a href="#export" role="tab"><i class="fas fa-file-export"></i></a></li>
-			<li><a href="#contact" role="tab"><i class="fas fa-envelope"></i></a></li>
-			<li><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
-			<li><a href="#about" role="tab"><i class="fas fa-info-circle"></i></a></li>
-		</ul>
-    </div>
-
-    <!-- Tab panes -->
-    <div class="sidebar-content">
-        <div class="sidebar-pane" id="home">
-            <h1 class="sidebar-header">OpenScoutMap<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p>
-            	<h2 id="campside_name">Lagerplatzame</h2>
-            	<h3>Details</h3>
-            	<span id="campside_desc"> </span>
-            	<ul>
-            		<li><a href="https://Gruppe19.at" target="_blank" id="campside_website">Website</a> </li>
-            		<li id="campside_addr">Adresse</li>
-					<li id="campside_addr2">Adresse</li>
-					<li id="campside_addr3">Adresse</li>
-            		<li id="campside_koords">Koordinate: Lat: <span id="test1"></span> Ing: <span id="test2"></span></li>
-            		<li id="campside_tags">Tags</li>
-            	</ul>
-				<img id="campside_img "style="background-color: aqua;" id="campside_img" src="">
-            	In anderer Karte anzeigen:
-            	<input type="submit"  class = "button" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
-            </p> 
-        </div>
-
-        <div class="sidebar-pane" id="search">
-            <h1 class="sidebar-header">Suche<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p>
-				<input type="textbox" id="globalsarch" class="text_input" placeholder="Suche" oninput="updateSearch(this.value)">
-				<p id="search_results">
-					
-				</p>
-            </p>
-            
-        </div>
-
-		<div class="sidebar-pane" id="filter">
-			<h1 class="sidebar-header">Filter<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-			<h2>Lagerplatz Typ</h2>
-			<form name=filter> 
-				<label class="chkbx" for="Test1">
-					<input type="checkbox" name="checkbox1" name="Test1">Pfadfinderheim
-				</label> 
-				<label class="chkbx" for="Test2">
-					<input type="checkbox" name="checkbox1" name="Test2">Lagerplatz
-				</label>
-				<label class="chkbx" for="Test3">
-					<input type="checkbox" name="checkbox1" name="Test3">Hybrid
-				</label>
-
-				<h2>Geografische Lage</h2>
-				<label for="fedStates">Bundesländer</label>
-				<select name="fedStates">
-					<option value="bgl">Burgenland</option>
-					<option value="ktn">Kärnten</option>
-					<option value="noe">Niederösterreich</option>
-					<option value="ooe">Oberösterreich</option>
-					<option value="sbg">Salzburg</option>
-					<option value="stm">Steiermark</option>
-					<option value="trl">Tirol</option>
-					<option value="vab">Vorarlberg</option>
-					<option value="vie">Wien</option>
-				</select>
-				<h2>Umkreis</h2>
-				<p>
-					<ul> 
-						<li> Drag and Drop!</li>
-						<li>Hebe Lagerplätze in einem bestimmten Umkreis hervor</li>
-						<li>Setze den Startpunkt und schon gehts los</li>
-						<li>Der Suchradius kann jederzeit verstellt werden</li>
-
-					</ul>
-					
-				</p>
-				<label class="chkbx" for="Test1">Umkreis in km
-					<input id="search-radius" type="number" step="0.001" min=0 value=1 name="" onchange="setSearchRadius(this.value)">
-				</label>
-				<input id="search-status" type="button" class="button" value="Ursprung setzen" onclick="searchRadius()"> 
-
-
-				
-				<h2>Points of Interest</h2>
-				<p>
-					Setze nach belieben eigene Punkte. Achtung, diese sind nur temporär da!
-				</p>
-				<p>
-					<ul> 
-						<li> Drag and Drop!</li>
-						<li> Mit Doppelklick auf Marker kannst du diesen entfernen.</li> 
-					</ul>
-				</p>
-				
-				<input type="button" class="button" value="Punkt setzen" onclick="setPoi()">
-				<input type="button" class="button" value="Alles löschen" onclick="deleteAllPoi()">
-			</form>
-		</div>
-
-        <div class="sidebar-pane" id="account">
-            <h1 class="sidebar-header">Account<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p>
-            	<b>Login</b> 
-            	<form id="account_login">
-	            <input type="text" name="user_name" class="text_input" placeholder="E-Mail Adresse">
-    	        <input type="password" name="user_passwd" class="text_input" placeholder="Password">
-            	<input type="submit" class = "button" value="Anmelden" name="button_submit"> 
+    <!--<div id="m_ls_warn">Bitte das Gerät drehen/Please rotate your device</div>-->
+    <div id="overlay_bg"></div>
+    <section id="overlay_content">
+        <div>
+            <h1>OpenScoutMap</h1>
+            <h3>Wichtigsten Funktionen des Tools</h3>
+            <ul>
+                <li><i class="fas fa-bars"></i> Hier werden die Info anzeigt. Einfach dafür auf einen Marker klicken
+                </li>
+                <li><i class="fas fa-filter"></i> Hier kannst du in Zunkuft mal nach bestimmten Kriterien filtern</li>
+                <li><i class="fas fa-train"></i> Hier kannst du deine öffentliche Anreise schon mal planen</li>
+                <li><i class="fas fa-envelope"></i> Hier kannst du mit mir in Kontakt treten</li>
+                <li><i class="fas fa-info-circle"></i> Hier versteckt sich der heilige Gral</li>
+                <li>Findest du das versteckte Cookie?</li>
+            </ul>
+            <form>
+                <input type="button" name="buttonStart" value="Starten" class="button" onclick="endStartup()">
+                <input type="checkbox" name="ov_cb" value="false" id="showStartupAgain">
+                <label for="ov_cb" class="hint">Du willst die Einführung nicht wieder sehen? Einfach einen Haken
+                    setzen!</label>
             </form>
-            </p>
-            <p>
-            	<b>Registierung</b> <br>
-            	Du bist noch nicht registriert? Dann hinterlasse hier deine Email-Adresse und du bekommst Anmeldedaten zugesendet.
-            	<form id="account_register">
-		            <input type="text" name="user_name_new" class="text_input" placeholder="E-Mail Adresse">
-		            <input type="submit" class = "button" value="Registieren" name="button_submit"> 
-            	</form>
-       	 	</p>
+        </div>
+    </section>
 
+    <div id="map"></div>
+    <div id="sidebar" class="sidebar collapsed">
+
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fas fa-map-marked"></i></a></li>
+                <li><a href="#search" role="tab"><i class="fas fa-search"></i></a></li>
+                <li><a href="#filter" role="tab"><i class="fas fa-filter"></i></a></li>
+                <li><a href="#account" role="tab"><i class="fas fa-user"></i></a></li>
+                <li><a href="#scotty" role="tab"><i class="fas fa-train"></i></a></li>
+                <li><a href="#help" role="tab"><i class="fas fa-question"></i></a></li>
+            </ul>
+
+            <ul role="tablist">
+                <li><a href="#export" role="tab"><i class="fas fa-file-export"></i></a></li>
+                <li><a href="#contact" role="tab"><i class="fas fa-envelope"></i></a></li>
+                <li><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
+                <li><a href="#about" role="tab"><i class="fas fa-info-circle"></i></a></li>
+            </ul>
         </div>
 
-		<div class="sidebar-pane" id="export">
-			<h1 class="sidebar-header">Export/Import<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">OpenScoutMap<span class="sidebar-close"><i
+                            class="fa fa-caret-left"></i></span></h1>
+                <p>
+                <h2 id="campside_name">Lagerplatzame</h2>
+                <h3>Details</h3>
+                <span id="campside_desc"> </span>
+                <ul>
+                    <li><a href="https://Gruppe19.at" target="_blank" id="campside_website">Website</a> </li>
+                    <li id="campside_addr">Adresse</li>
+                    <li id="campside_addr2">Adresse</li>
+                    <li id="campside_addr3">Adresse</li>
+                    <li id="campside_koords">Koordinate: Lat: <span id="test1"></span> Ing: <span id="test2"></span>
+                    </li>
+                    <li id="campside_tags">Tags</li>
+                </ul>
+                <img id="campside_img " style="background-color: aqua;" id="campside_img" src="">
+                In anderer Karte anzeigen:
+                <input type="submit" class="button" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
+                </p>
+            </div>
 
-		</div>
+            <div class="sidebar-pane" id="search">
+                <h1 class="sidebar-header">Suche<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <p>
+                    <input type="textbox" id="globalsarch" class="text_input" placeholder="Suche"
+                        oninput="updateSearch(this.value)">
+                <p id="search_results">
 
-        <div class="sidebar-pane" id="scotty">
-            <h1 class="sidebar-header">Zugverbindungen<span class="sidebar-close"><i class="fas fa-caret-left"></i></span></h1>
-			<p>
-				Nach Eingabe der Daten wirst du auf die Seite der ÖBB weitergeleitet.
-			
-			<iframe src="scotty_new.html" frameborder="0" ></iframe>
-			<span class="hint">Zur Verfügung gestellt von <a href="https://personenverkehr.oebb.at/">ÖBB-PV AG </a>&copy;.</span>
-			</p>
-        </div>
-        <div class="sidebar-pane" id="help">
-            <h1 class="sidebar-header">Legende<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p>
-            	<b>Kartensymbole</b>
-            	<table>
-            		<tr>
-            			<td><img src="icons/tent_icon.png" class="map_icon"> </td>
-						<td>Lagerplatz</td>
-            		</tr>
-					<tr>
-            			<td><img src="icons/house_icon.png" class="map_icon"></td>
-						<td>Pfadfinderheim</td>
-					</tr>
-					<tr>
-            			<td><img src="icons/mixed_icon.png" class="map_icon"></td>
-            			<td>Pfadfinderheim inkl Lagerplatz</td>
-            		</tr>
-					<tr>
-            			<td><img src="icons/jamborette_icon.png" class="map_icon"></td>
-            			<td>Jamborette</td>
-            		</tr>
-					<tr>
-            			<td><img src="icons/jamboree_icon.png" class="map_icon"></td>
-            			<td>Jamboree</td>
-            		</tr>
-					<tr>
-            			<td><img src="icons/poi_icon.png" class="map_icon"></td>
-            			<td>Point of Interest</td>
-            		</tr>
-					<tr>
-            			<td><img src="icons/circle_icon.png" class="map_icon"></td>
-            			<td>TBA</td>
-            		</tr>
-            	</table>
-            </p>
-        </div>
+                </p>
+                </p>
 
-        <div class="sidebar-pane" id="contact">
-            <h1 class="sidebar-header">Kontakt<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p>
-            	Du hast etwas beizutragen? Dann hast du hier die Möglichkeit  
-            	 <form>
-            	
-            	 <textarea class = "text_input" placeholder="Kommentarfeld" name="comment" rows="10" cols="50"></textarea>
-            	<input type="text" class="text_input" placeholder="E-Mail Adresse*" name="name">
-            	<input type="submit" class = "button" value="Absenden" name="button_submit"> 
-            	<br>
-            	<span class="hint">*Wenn du keine Rückmeldung erwartest, dann das betreffende Feld leer. </span>
-            </form>               	
-            </p>
-        </div>
+            </div>
 
-        <div class="sidebar-pane" id="about" class="sec_about">
-            <h1 class="sidebar-header">Über<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p>Crafted with <i class="fa fa-heart"></i> by Sirknival</p>
-            <p>
-            	Inspired by <a href="http://lagerplaetze.scoutware.at/" target="_blank">Scoutware</a>
-            </p>
-			<p>
-            	Mentioned offical Austrian Campsites: <a href="https://ppoe.at/lagerplaetze/" target="_blank">PPÖ ASCN</a>
-            </p>
+            <div class="sidebar-pane" id="filter">
+                <h1 class="sidebar-header">Filter<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <h2>Lagerplatz Typ</h2>
+                <form name=filter>
+                    <label class="chkbx" for="Test1">
+                        <input type="checkbox" name="checkbox1" name="Test1">Pfadfinderheim
+                    </label>
+                    <label class="chkbx" for="Test2">
+                        <input type="checkbox" name="checkbox1" name="Test2">Lagerplatz
+                    </label>
+                    <label class="chkbx" for="Test3">
+                        <input type="checkbox" name="checkbox1" name="Test3">Hybrid
+                    </label>
+
+                    <h2>Geografische Lage</h2>
+                    <label for="fedStates">Bundesländer</label>
+                    <select name="fedStates">
+                        <option value="bgl">Burgenland</option>
+                        <option value="ktn">Kärnten</option>
+                        <option value="noe">Niederösterreich</option>
+                        <option value="ooe">Oberösterreich</option>
+                        <option value="sbg">Salzburg</option>
+                        <option value="stm">Steiermark</option>
+                        <option value="trl">Tirol</option>
+                        <option value="vab">Vorarlberg</option>
+                        <option value="vie">Wien</option>
+                    </select>
+                    <h2>Umkreis</h2>
+                    <p>
+                    <ul>
+                        <li> Drag and Drop!</li>
+                        <li>Hebe Lagerplätze in einem bestimmten Umkreis hervor</li>
+                        <li>Setze den Startpunkt und schon gehts los</li>
+                        <li>Der Suchradius kann jederzeit verstellt werden</li>
+
+                    </ul>
+
+                    </p>
+                    <label class="chkbx" for="Test1">Umkreis in km
+                        <input id="search-radius" type="number" step="0.001" min=0 value=1 name=""
+                            onchange="setSearchRadius(this.value)">
+                    </label>
+                    <input id="search-status" type="button" class="button" value="Ursprung setzen"
+                        onclick="searchRadius()">
 
 
-            <p>Based on the following resources:  
-            	<ul>
-            		<li><a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></li>
-            		<li><a href="https://leafletjs.com/" target="_blank">LeafletJS</a></li>
-            		<li><a href="https://github.com/Turbo87/sidebar-v2" target="_blank">Sidebar V2</a></li>
-            		<li><a href="https://github.com/ljagis/leaflet-measure" target="_blank">Leaftlet-measure</a></li>
-            		<li><a href="https://fontawesome.com" target="_blank">FontAwesome</a></li>
+
+                    <h2>Points of Interest</h2>
+                    <p>
+                        Setze nach belieben eigene Punkte. Achtung, diese sind nur temporär da!
+                    </p>
+                    <p>
+                    <ul>
+                        <li> Drag and Drop!</li>
+                        <li> Mit Doppelklick auf Marker kannst du diesen entfernen.</li>
+                    </ul>
+                    </p>
+
+                    <input type="button" class="button" value="Punkt setzen" onclick="setPoi()">
+                    <input type="button" class="button" value="Alles löschen" onclick="deleteAllPoi()">
+                </form>
+            </div>
+
+            <div class="sidebar-pane" id="account">
+                <h1 class="sidebar-header">Account<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    <b>Login</b>
+                <form id="account_login">
+                    <input type="text" name="user_name" class="text_input" placeholder="E-Mail Adresse">
+                    <input type="password" name="user_passwd" class="text_input" placeholder="Password">
+                    <input type="submit" class="button" value="Anmelden" name="button_submit">
+                </form>
+                </p>
+                <p>
+                    <b>Registierung</b> <br>
+                    Du bist noch nicht registriert? Dann hinterlasse hier deine Email-Adresse und du bekommst
+                    Anmeldedaten zugesendet.
+                <form id="account_register">
+                    <input type="text" name="user_name_new" class="text_input" placeholder="E-Mail Adresse">
+                    <input type="submit" class="button" value="Registieren" name="button_submit">
+                </form>
+                </p>
+
+            </div>
+
+            <div class="sidebar-pane" id="export">
+                <h1 class="sidebar-header">Export/Import<span class="sidebar-close"><i
+                            class="fa fa-caret-left"></i></span></h1>
+
+            </div>
+
+            <div class="sidebar-pane" id="scotty">
+                <h1 class="sidebar-header">Zugverbindungen<span class="sidebar-close"><i
+                            class="fas fa-caret-left"></i></span></h1>
+                <p>
+                    Nach Eingabe der Daten wirst du auf die Seite der ÖBB weitergeleitet.
+
+                    <iframe src="scotty_new.html" frameborder="0"></iframe>
+                    <span class="hint">Zur Verfügung gestellt von <a href="https://personenverkehr.oebb.at/">ÖBB-PV AG
+                        </a>&copy;.</span>
+                </p>
+            </div>
+            <div class="sidebar-pane" id="help">
+                <h1 class="sidebar-header">Legende<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    <b>Kartensymbole</b>
+                <table>
+                    <tr>
+                        <td><img src="icons/tent_icon.png" class="map_icon"> </td>
+                        <td>Lagerplatz</td>
+                    </tr>
+                    <tr>
+                        <td><img src="icons/house_icon.png" class="map_icon"></td>
+                        <td>Pfadfinderheim</td>
+                    </tr>
+                    <tr>
+                        <td><img src="icons/mixed_icon.png" class="map_icon"></td>
+                        <td>Pfadfinderheim inkl Lagerplatz</td>
+                    </tr>
+                    <tr>
+                        <td><img src="icons/jamborette_icon.png" class="map_icon"></td>
+                        <td>Jamborette</td>
+                    </tr>
+                    <tr>
+                        <td><img src="icons/jamboree_icon.png" class="map_icon"></td>
+                        <td>Jamboree</td>
+                    </tr>
+                    <tr>
+                        <td><img src="icons/poi_icon.png" class="map_icon"></td>
+                        <td>Point of Interest</td>
+                    </tr>
+                    <tr>
+                        <td><img src="icons/circle_icon.png" class="map_icon"></td>
+                        <td>TBA</td>
+                    </tr>
+                </table>
+                </p>
+            </div>
+
+            <div class="sidebar-pane" id="contact">
+                <h1 class="sidebar-header">Kontakt<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    Du hast etwas beizutragen? Dann hast du hier die Möglichkeit
+                <form>
+
+                    <textarea class="text_input" placeholder="Kommentarfeld" name="comment" rows="10"
+                        cols="50"></textarea>
+                    <input type="text" class="text_input" placeholder="E-Mail Adresse*" name="name">
+                    <input type="submit" class="button" value="Absenden" name="button_submit">
+                    <br>
+                    <span class="hint">*Wenn du keine Rückmeldung erwartest, dann das betreffende Feld leer. </span>
+                </form>
+                </p>
+            </div>
+
+            <div class="sidebar-pane" id="about" class="sec_about">
+                <h1 class="sidebar-header">Über<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <p>Crafted with <i class="fa fa-heart"></i> by Sirknival</p>
+                <p>
+                    Inspired by <a href="http://lagerplaetze.scoutware.at/" target="_blank">Scoutware</a>
+                </p>
+                <p>
+                    Mentioned offical Austrian Campsites: <a href="https://ppoe.at/lagerplaetze/" target="_blank">PPÖ
+                        ASCN</a>
+                </p>
+
+
+                <p>Based on the following resources:
+                <ul>
+                    <li><a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></li>
+                    <li><a href="https://leafletjs.com/" target="_blank">LeafletJS</a></li>
+                    <li><a href="https://github.com/Turbo87/sidebar-v2" target="_blank">Sidebar V2</a></li>
+                    <li><a href="https://github.com/ljagis/leaflet-measure" target="_blank">Leaftlet-measure</a></li>
+                    <li><a href="https://fontawesome.com" target="_blank">FontAwesome</a></li>
                     <li><a href="https://fusejs.io/" target="_blank">FuseJS</a></li>
-            		<li><a href="https://fontawesome.com/cheatsheet" target="_blank">FontAwesome CheatSheat</a></li>
-            		
-            	</ul>
-            </p>
-             
-        </div>
+                    <li><a href="https://fontawesome.com/cheatsheet" target="_blank">FontAwesome CheatSheat</a></li>
 
-		<div class="sidebar-pane" id="settings">
-			<h1 class="sidebar-header">Einstellungen<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-			<h2>Akzentfarbe</h2>
-			<p>Gefällt dir die Farbe nicht? Dann wähl' doch eine andere aus...</p> 
-			<div class="wheel" id="colorWheelDemo"></div>
-			<input type="button" value="Reset" class="button" onclick="resetColor()" style="background-color: #13803e"> 
-			<h2>Cookies</h2> 
-			<p>Gl&uuml;ckwunsch, du hast ein Keks gefunden. Nat&uuml;rlich darfst du ihn behalten. 
-				<i class="fas fa-cookie"></i>
-			</p>
-			<p>Cookies löschen?</p>
-			<input type="button" value="Bestätigen" class="button" onclick="resetCookie()">   
-		</div>
-    </div>
+                </ul>
+                </p>
+
+            </div>
+
+            <div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Einstellungen<span class="sidebar-close"><i
+                            class="fa fa-caret-left"></i></span></h1>
+                <h2>Akzentfarbe</h2>
+                <p>Gefällt dir die Farbe nicht? Dann wähl' doch eine andere aus...</p>
+                <div class="wheel" id="colorWheelDemo"></div>
+                <input type="button" value="Reset" class="button" onclick="resetColor()"
+                    style="background-color: #13803e">
+                <h2>Cookies</h2>
+                <p>Gl&uuml;ckwunsch, du hast ein Keks gefunden. Nat&uuml;rlich darfst du ihn behalten.
+                    <i class="fas fa-cookie"></i>
+                </p>
+                <p>Cookies löschen?</p>
+                <input type="button" value="Bestätigen" class="button" onclick="resetCookie()">
+            </div>
+        </div>
     </div>
     <script src="js/data.js"></script>
- 	<script src="js/map.js"></script>
-	<script src="js/colorWheel.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/colorWheel.js"></script>
 
 </body>
-</html>
 
+</html>

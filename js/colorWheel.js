@@ -18,7 +18,7 @@ var colorWheel = iro.ColorPicker("#colorWheelDemo", {
   display: 'block', // CSS display value
 });
 
-colorWheel.on('input:change', function(color, changes){
+colorWheel.on('input:change', function (color, changes) {
   var newColor = color.hexString;
   root.style.setProperty('--color_main', newColor);
   document.cookie = "color=" + newColor;
