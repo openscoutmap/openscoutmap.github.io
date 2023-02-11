@@ -97,9 +97,9 @@
                 <img id="campside_img" src="img-entries/logo_lvnoe.png">
                 </p>
                 <p>
-                In anderer Karte anzeigen:
-                <input type="submit" class="button" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
-             </p>
+                    In anderer Karte anzeigen:
+                    <input type="submit" class="button" id="gmaps_open" value="Google Maps" onclick="openInMaps()">
+                </p>
             </div>
 
             <div class="sidebar-pane" id="search">
@@ -117,20 +117,8 @@
             <div class="sidebar-pane" id="filter">
                 <h1 class="sidebar-header">Filter<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                
-                <form name=filter>
-                    <!--
-                    <h2>Lagerplatz Typ</h2>
-                    <label class="chkbx" for="Test1">
-                        <input type="checkbox" name="checkbox1" name="Test1">Pfadfinderheim
-                    </label>
-                    <label class="chkbx" for="Test2">
-                        <input type="checkbox" name="checkbox1" name="Test2">Lagerplatz
-                    </label>
-                    <label class="chkbx" for="Test3">
-                        <input type="checkbox" name="checkbox1" name="Test3">Hybrid
-                    </label>-->
 
+                <form name=filter>
                     <h2>Geografische Lage</h2>
                     <label for="fedStates">Bundesländer</label>
                     <select onchange="updateStateHighlight(this.value)" name="fedStates">
@@ -210,8 +198,51 @@
             </div>
 
             <div class="sidebar-pane" id="export">
-                <h1 class="sidebar-header">Export/Import<span class="sidebar-close"><i
-                            class="fa fa-caret-left"></i></span></h1>
+                <h1 class="sidebar-header">Export<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <form name="export_type">
+                    <p>
+                    <h2>Datenpunkt Typ</h2>
+                    <label class="chkbx" for="chkbx_house">
+                        <input type="checkbox" value="tent" name="chkbx_house" checked>Pfadfinderheim
+                    </label>
+                    <label class="chkbx" for="chkbx_tent">
+                        <input type="checkbox" value="house" name="chkbx_tent" checked>Lagerplatz
+                    </label>
+                    <label class="chkbx" for="chkbx_mixed">
+                        <input type="checkbox" value="mixed" name="chkbx_mixed" checked>Hybrid
+                    </label>
+                    <label class="chkbx" for="chkbx_jmbr">
+                        <input type="checkbox" value="jamboree" name="chkbx_jmbr" checked>Jamboree
+                    </label>
+                    <label class="chkbx" for="chkbx_jmtt">
+                        <input type="checkbox" value="jamborette" name="chkbx_jmtt" checked>Jamborette
+                    </label>
+                    </p>
+                    <p>
+                    <h2>Datenpunkt Typ</h2>
+                    <label class="chkbx" for="chkbx_name">
+                        <input type="checkbox" value="name" name="chkbx_name" checked>Name
+                    </label>
+                    <label class="chkbx" for="chkbx_addr">
+                        <input type="checkbox" value="address" name="chkbx_addr" checked>Adresse
+                    </label>
+                    <label class="chkbx" for="chkbx_coord">
+                        <input type="checkbox" value="coordinates" name="chkbx_coord" checked>Koordinaten
+                    </label>
+                    <label class="chkbx" for="chkbx_web">
+                        <input type="checkbox" value="website" name="chkbx_web" checked>Website
+                    </label>
+                    <label class="chkbx" for="chkbx_desc">
+                        <input type="checkbox" value="descr" name="chkbx_desc" checked>Beschreibung
+                    </label>
+                    <label class="chkbx" for="chkbx_tag">
+                        <input type="checkbox" value="tag" name="chkbx_tag" checked>Tags
+                    </label>
+                    </p>
+                    <input type="submit" class="button" value="Absenden" name="button_submit" onclick="exportDesiredDatapoints()">
+                </form>
+
 
             </div>
 
@@ -300,7 +331,8 @@
                     <li><a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></li>
                     <li><a href="https://leafletjs.com/" target="_blank">LeafletJS</a></li>
                     <li><a href="https://github.com/Turbo87/sidebar-v2" target="_blank">Sidebar V2</a></li>
-                    <li><a href="https://github.com/ginseng666/GeoJSON-TopoJSON-Austria" target="_blank">geoJSON for Austria</a></li>
+                    <li><a href="https://github.com/ginseng666/GeoJSON-TopoJSON-Austria" target="_blank">geoJSON for
+                            Austria</a></li>
                     <li><a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></li>
                     <li><a href="https://fontawesome.com" target="_blank">FontAwesome</a></li>
                     <li><a href="https://fusejs.io/" target="_blank">FuseJS</a></li>
@@ -332,10 +364,11 @@
     <script src="js/map.js"></script>
     <script src="js/colorWheel.js"></script>
     <script src="js/geojson.js"></script>
-
+    <script src="jsPDF-1.3.2/dist/jspdf.min.js"></script>
+    
     <script>
-        updateSidebar(1,0,0);
-                
+        updateSidebar(1, 0, 0);
+
     </script>
 
 </body>

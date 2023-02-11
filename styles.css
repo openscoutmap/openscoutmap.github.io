@@ -183,9 +183,9 @@ p.searchResult:hover {
 }
 
 /**************
- * FILTER TAB *
+ * Export TAB *
  **************/
-#filter label.chkbx {
+  #export label.chkbx {
   display: block;
 }
 

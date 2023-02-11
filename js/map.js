@@ -97,11 +97,19 @@ var overlays = {
 /**************************************
  * SETUP MAP AND MAP CONTROL ELEMENTS *
  **************************************/
+//Home point of view
+
+var home = {
+	lat: 48.2,
+	lng: 16.4,
+	zoom: 13
+};
+
 
 //Init map
 var campsides_map = L.map('map', {
-	center: [48.1, 16.2],
-	zoom: 13,
+	center: [home.lat, home.lng],
+	zoom: home.zoom,
 	minZoom: 6,
 	attributionControl: true,
 	zoomControl: false,
@@ -143,6 +151,13 @@ L.control.measure({
 	primaryAreaUnit: 'sqmeters',
 	secondaryAreaUnit: undefined
 }).addTo(campsides_map);
+
+//Add home button
+L.easyButton('fas fa-home', function(btn, map){
+	map.setView(new L.LatLng(home.lat, home.lng), home.zoom, );
+	}, {
+	position: 'topright'
+}).addTo( campsides_map );
 
 //Create and add left sidebar
 var lft_sidebar = L.control.sidebar('sidebar', {
@@ -293,6 +308,7 @@ function setPoi() {
 function deleteAllPoi() {
 	marker_poi.clearLayers();
 	poiCounter = 1;
+
 }
 
 function updateStateHighlight(state) {
@@ -305,10 +321,8 @@ function updateStateHighlight(state) {
 	
 }
 
-var home = {
-	lat: 70.3,
-	lng: 50.5,
-	zoom: 8
-};
-
-L.easyButton('fa-home').addTo(campsides_map);
+function exportDesiredDatapoints() {
+	var pdf = new jsPDF('p', 'pt', 'letter');
+	
+	pdf.save('test.pdf');
+}
