@@ -100,9 +100,9 @@ var overlays = {
 //Home point of view
 
 var home = {
-	lat: 48.2,
-	lng: 16.4,
-	zoom: 13
+	lat: 47.5,
+	lng: 14,
+	zoom: 8
 };
 
 
