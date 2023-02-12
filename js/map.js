@@ -45,8 +45,8 @@ var tmpl_icon = L.Icon.extend({
 });
 
 //Init three instances of class template icon 
-var icon_campside = new tmpl_icon({ 'iconUrl': 'icons/tent_icon.png' });
-icon_house = new tmpl_icon({ 'iconUrl': 'icons/house_icon.png' }),
+var icon_campside = new tmpl_icon({ 'iconUrl': 'icons/tent_icon.png' }),
+	icon_house = new tmpl_icon({ 'iconUrl': 'icons/house_icon.png' }),
 	icon_mixed = new tmpl_icon({ 'iconUrl': 'icons/mixed_icon.png' }),
 	icon_jamboree = new tmpl_icon({ 'iconUrl': 'icons/jamboree_icon.png' }),
 	icon_jamborette = new tmpl_icon({ 'iconUrl': 'icons/jamborette_icon.png' }),
@@ -67,9 +67,10 @@ var campside_house = new L.LayerGroup(),
  * SETUP MARKERS *
  *****************/
 var cathegory_types = ["tent", "house", "mixed", "jamboree", "jamborette"]
-var layer_groups = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette];
+var layer_list = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette];
 var icon_list = [icon_campside, icon_house, icon_mixed, icon_jamboree, icon_jamborette];
 
+/*
 //Sets all makers on the corresponding layers
 var entry_id = 1;
 for (elem in list_places) {
@@ -82,9 +83,38 @@ for (elem in list_places) {
 		.on('mouseover', function (e) { this.openPopup(); })
 		.on('mouseout', function (e) { this.closePopup(); })
 		.on('click', function (e) { updateSidebar(this._icon.alt, 1, 1); }) //this._popup._content//replace by this.sourcetarget.options.alt
-		.addTo(layer_groups[index]);
+		.addTo(layer_list[index]);
 	entry_id++;
+}*/
+
+/* Example for filter
+
+// filter function, change from "parking" to "stadium", to show only one marker on the map
+function soffParkingFilter(feature, layer) {
+  if(feature.properties.parking === "parking") return true;
 }
+*/
+
+function selectBasedOnCathegory(feature, list){
+	return list[cathegory_types.indexOf(feature.properties.cathegory)];
+}
+
+function onEachFeature(feature, layer) {
+	layer.bindPopup(feature.properties.name);
+	layer.on('mouseover', function (e) { this.openPopup(); });
+	layer.on('mouseout', function (e) { this.closePopup(); });
+	layer.on('click', function (e) { updateSidebar(feature.properties.id, 1, 1); });
+	layer.addTo(selectBasedOnCathegory(feature, layer_list));
+}
+
+L.geoJSON(geojsonFeature, {
+	pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {icon: selectBasedOnCathegory(feature, icon_list)});
+	},
+  //filter: soffParkingFilter,
+	onEachFeature: onEachFeature
+});
+
 
 //Create dicts for control box
 var overlays = {
@@ -178,11 +208,11 @@ var options = {
 	findAllMatches: true,
 	minMatchCharLength: 3,
 	threshold: 0.5,
-	keys: ["name", "tag", "postal code", "state", "country"]
+	keys: ["properties.name", "properties.tag", "properties.postalcode", "properties.state", "properties.country"]
 };
 
 //Init fuse search
-var fuse = new Fuse(list_places, options);
+var fuse = new Fuse(geojsonFeature, options);
 
 /*****************************
  * LEAFLETJS RELVATED EVENTS *
@@ -208,19 +238,22 @@ var poiCounter = 1;
 //@function updateSidebar (String cs_name, Int prev_state{0,1}, Int opensidebar{0,1})
 //Update Sidebar after marker onclick-event 
 function updateSidebar(index, prev_state, opensidebar) {
-	var cur_entry = list_places[--index];
+	var cur_entry = geojsonFeature[--index];
+	var lat = cur_entry.geometry.coordinates[1];
+	var lng = cur_entry.geometry.coordinates[0];
 	if (opensidebar == 1) {
 		if (prev_state == 0)
-			campsides_map.flyTo([cur_entry.coords.lat, cur_entry.coords.lng], 12, { duration: 2 });
+			campsides_map.flyTo([lat, lng], 12, { duration: 2 });
 		lft_sidebar.open('home');
 	}
+	cur_entry = cur_entry.properties;
 	document.getElementById("campside_name").innerHTML = cur_entry.name;
 	document.getElementById("campside_desc").innerHTML = cur_entry.desc;
 	cur_camp_url = cur_entry.website;
 	document.getElementById("campside_addr").innerHTML = "<i class=\"fas fa-home\"></i> " + cur_entry.addr;
 	document.getElementById("campside_addr2").innerHTML = "&nbsp; &nbsp; &nbsp;" + cur_entry.postalcode;
 	document.getElementById("campside_addr3").innerHTML = "&nbsp; &nbsp; &nbsp;" + cur_entry.state + " - " + cur_entry.country;
-	document.getElementById("campside_koords").innerHTML = "<i class=\"fas fa-map-marker-alt\"></i> " + cur_entry.coords.lat + " " + cur_entry.coords.lng;
+	document.getElementById("campside_koords").innerHTML = "<i class=\"fas fa-map-marker-alt\"></i> " + lat + " " + lng;
 	document.getElementById("campside_img").src = "./img-entries/" + cur_entry.imgsrc;
 	var tag_array = cur_entry.tag.trim().split(",");
 	var tag_str = "<i class=\"fas fa-hashtag\"></i> ";
@@ -259,9 +292,8 @@ function openWebsite() {
 function updateSearch(term) {
 	var answer = "";
 	var results = fuse.search(term)
-
 	for (i in results) {
-		answer = answer + "<p id=\" " + results[i].item.id + " \" class=\"searchResult\" onclick=\"updateSidebar(this.id,0, 1)\" >" + results[i].item.name + "</p> ";
+		answer = answer + "<p id=\"" + results[i].item.properties.id + "\" class=\"searchResult\" onclick=\"updateSidebar(this.id,0, 1)\" >" + results[i].item.properties.name + "</p> ";
 	}
 	document.getElementById("search_results").innerHTML = answer;
 }
@@ -362,10 +394,10 @@ function submitFeedback() {
 }
 
 function exportDesiredDatapoints() {
-//Exports the desired datapoint as PDF
-//STUB
-//function exportDesiredDatapoints() {
-var pdf = new jsPDF('p', 'pt', 'letter');
+	//Exports the desired datapoint as PDF
+	//STUB
+	//function exportDesiredDatapoints() {
+	var pdf = new jsPDF('p', 'pt', 'letter');
 
-pdf.save('test.pdf');
+	pdf.save('test.pdf');
 }
