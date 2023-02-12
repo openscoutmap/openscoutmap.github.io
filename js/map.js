@@ -199,6 +199,8 @@ lft_sidebar.on('closing', function () {
 /********************
  * CUSTOM FUNCTIONS *
  ********************/
+
+var cur_camp_url = "";
 //@function updateSidebar (String cs_name, Int prev_state{0,1}, Int opensidebar{0,1})
 //Update Sidebar after marker onclick-event 
 function updateSidebar(index, prev_state, opensidebar) {
@@ -210,7 +212,7 @@ function updateSidebar(index, prev_state, opensidebar) {
 	}
 	document.getElementById("campside_name").innerHTML = cur_entry.name;
 	document.getElementById("campside_desc").innerHTML = cur_entry.desc;
-	document.getElementById("campside_website").href = cur_entry.website;
+	cur_camp_url = cur_entry.website;
 	document.getElementById("campside_addr").innerHTML = cur_entry.addr;
 	document.getElementById("campside_addr2").innerHTML = cur_entry.postalcode;
 	document.getElementById("campside_addr3").innerHTML = cur_entry.state + " - " + cur_entry.country;
@@ -240,6 +242,11 @@ function openInMaps() {
 
 	coords_cur = coords_cur.split(" ");
 	window.open("https://www.google.com/maps/place/" + coords_cur[0] + "\°N" + coords_cur[1] + "\°E", '_blank');
+}
+
+function openWebsite(){
+	console.log(cur_camp_url);
+	window.open(cur_camp_url, '_blank');
 }
 
 //@function updateSearch (String term)

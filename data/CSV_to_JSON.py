@@ -1,4 +1,4 @@
-import csv, json
+import json
 
 tsvFilePath = 'OpenScoutMap - Datensatz.tsv'
 jsFilePath = 'OpenScoutMapData.js'
@@ -34,7 +34,7 @@ with open(tsvFilePath, newline='\n', encoding='utf-8-sig') as tsvFile:
 
 with open(jsFilePath, 'w+') as jsFile:
     jsonString = 'var list_places ='
-    jsonString += json.dumps(data)
+    jsonString += json.dumps(data, indent=4)
     spcial_char_map = {ord('ä'): '&auml;', ord('ü'): '&Uuml;', ord('ö'): '&ouml;', ord('Ä'): '&Auml;', ord('Ü'): '&Uuml;', ord('Ö'): '&Ouml;', ord('ß'): '&szlig'}
     jsonString = jsonString.translate(spcial_char_map)
     jsonString += ';'
