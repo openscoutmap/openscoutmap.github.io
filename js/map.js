@@ -213,13 +213,13 @@ function updateSidebar(index, prev_state, opensidebar) {
 	document.getElementById("campside_name").innerHTML = cur_entry.name;
 	document.getElementById("campside_desc").innerHTML = cur_entry.desc;
 	cur_camp_url = cur_entry.website;
-	document.getElementById("campside_addr").innerHTML = cur_entry.addr;
-	document.getElementById("campside_addr2").innerHTML = cur_entry.postalcode;
-	document.getElementById("campside_addr3").innerHTML = cur_entry.state + " - " + cur_entry.country;
-	document.getElementById("campside_koords").innerHTML = cur_entry.coords.lat + " " + cur_entry.coords.lng;
+	document.getElementById("campside_addr").innerHTML = "<i class=\"fas fa-home\"></i> " +cur_entry.addr;
+	document.getElementById("campside_addr2").innerHTML = "&nbsp; &nbsp; &nbsp;" +cur_entry.postalcode;
+	document.getElementById("campside_addr3").innerHTML = "&nbsp; &nbsp; &nbsp;"+ cur_entry.state + " - " + cur_entry.country;
+	document.getElementById("campside_koords").innerHTML = "<i class=\"fas fa-map-marker-alt\"></i> " + cur_entry.coords.lat + " " + cur_entry.coords.lng;
 	document.getElementById("campside_img").src = "./img-entries/" + cur_entry.imgsrc;
 	var tag_array = cur_entry.tag.trim().split(",");
-	var tag_str = "Tags: ";
+	var tag_str = "<i class=\"fas fa-hashtag\"></i> ";
 	for (tag in tag_array){
 		tag_str += "<span class=\"tag_link\" onclick=\"openTagInSearch(this.innerHTML)\" >" + tag_array[tag] + "</span>, ";
 	}

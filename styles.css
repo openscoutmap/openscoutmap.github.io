@@ -149,6 +149,12 @@ textarea.text_input {
 /****************
  * HOMEMENU TAB *
  ****************/
+ #home ul {
+  list-style: none;
+  list-style-position: outside;
+  text-align: left;
+ }
+
  #campside_img {
   width: 50%;
   margin: 0 25% 0 25%;
