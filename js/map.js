@@ -205,7 +205,7 @@ function updateSidebar(index, prev_state, opensidebar) {
 	var cur_entry = list_places[--index];
 	if (opensidebar == 1){
 		if (prev_state == 0)
-			campsides_map.flyTo([cur_entry.coords.lat, cur_entry.coords.lng], campsides_map.getZoom(), { duration: 2 });
+			campsides_map.flyTo([cur_entry.coords.lat, cur_entry.coords.lng], 12, { duration: 2 });
 		lft_sidebar.open('home');
 	}
 	document.getElementById("campside_name").innerHTML = cur_entry.name;
