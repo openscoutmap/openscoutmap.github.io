@@ -21,6 +21,8 @@ function endStartup() {
 //Checks if the cookie includes showStartUp-tag and extract its value
 //If true, startup overlay will be shown, otherwise it will be skipped
 //and removed
+var global_main_color ="";
+
 function checkCookies() {
 	var cookie = document.cookie.split(';');
 	var startUpflag = true;
@@ -34,7 +36,7 @@ function checkCookies() {
 		}
 		if (cookie[i].includes("color")) {
 			var color = cookie[i].replace("color=", "").trim();
-			var newColor = color;
+			global_main_color = color;
 			if (color != "#13803e") {
 				document.querySelector(':root').style.setProperty('--color_main', color)
 			}

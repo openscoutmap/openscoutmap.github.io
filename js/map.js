@@ -328,6 +328,27 @@ function updateStateHighlight(state) {
 	
 }
 
+
+function submitFeedback(){
+	var feedback = document.getElementById("feedback_text").value;
+	var contact = document.getElementById("feedback_contact").value;
+	var url = "https://api.thingspeak.com/update";
+	var apikey = "ICV74V58AY76KFGF";
+	var data = "apikey=" + apikey + "&field1=" + feedback + "&field2=" + contact;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send(data);
+
+	lft_sidebar.close();
+	document.getElementById("feedback_text").value = "";
+	document.getElementById("feedback_contact").value = "";
+
+	alert("Abgesendet!");
+
+}
+
 function exportDesiredDatapoints() {
 	var pdf = new jsPDF('p', 'pt', 'letter');
 	

@@ -45,7 +45,7 @@
                 <li><i class="fas fa-user"></i> <s> Hier kannst du in Zukunft einen Account anlegen</s> Work in Progress</li>
                 
                 <li><i class="fas  fa-file-export"></i> <s> Hier kannst du dir Datenpunkte herunterladen</s> Work in Progress</li>
-                <li><i class="fas fa-envelope"></i> <s> Hier kannst du mit mir in Kontakt treten</s> Work in Progress</li>
+                <li><i class="fas fa-envelope"></i> Hier kannst du mit mir in Kontakt treten</li>
                 <li><i class="fas fa-info-circle"></i> Hier versteckt sich der heilige Gral</li>
                 
                 <li>Findest du das versteckte Cookie?</li>
@@ -124,9 +124,10 @@
                 </h1>
 
                 <form name=filter>
-                    <h2>Geografische Lage</h2>
+                    <h2>Geografische Lage - Overlay</h2>
                     <label for="fedStates">Bundesländer</label>
                     <select onchange="updateStateHighlight(this.value)" name="fedStates">
+                        <option value="non">Keine</option>
                         <option value="all">Alle</option>
                         <option value="bgl">Burgenland</option>
                         <option value="ktn">Kärnten</option>
@@ -307,12 +308,12 @@
                 </h1>
                 <p>
                     Du hast etwas beizutragen? Dann hast du hier die Möglichkeit
-                <form>
+                <form id="feedback_form"></form>
 
-                    <textarea class="text_input" placeholder="Kommentarfeld" name="comment" rows="10"
+                    <textarea class="text_input" id="feedback_text" placeholder="Kommentarfeld" name="comment" rows="10"
                         cols="50"></textarea>
-                    <input type="text" class="text_input" placeholder="E-Mail Adresse*" name="name">
-                    <input type="submit" class="button" value="Absenden" name="button_submit">
+                    <input type="text" class="text_input" id="feedback_contact" placeholder="E-Mail Adresse*" name="name">
+                    <input type="button" class="button" onclick="submitFeedback(event)" value="Absenden" name="button_submit">
                     <br>
                     <span class="hint">*Wenn du keine Rückmeldung erwartest, dann das betreffende Feld leer. </span>
                 </form>
@@ -366,6 +367,7 @@
         </div>
     </div>
     <script src="data/OpenScoutMapData.js"></script>
+    <script src="js/newgjs.js"></script>
     <script src="js/map.js"></script>
     <script src="js/colorWheel.js"></script>
     <script src="js/geojson.js"></script>

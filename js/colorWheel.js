@@ -19,9 +19,9 @@ var colorWheel = iro.ColorPicker("#colorWheelDemo", {
 });
 
 colorWheel.on('input:change', function (color, changes) {
-  var newColor = color.hexString;
-  root.style.setProperty('--color_main', newColor);
-  document.cookie = "color=" + newColor;
+  global_main_color = color.hexString;
+  root.style.setProperty('--color_main', global_main_color);
+  document.cookie = "color=" + global_main_color;
   //TODO Shift Accent color properly 
 });
 
