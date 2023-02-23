@@ -70,23 +70,6 @@ var cathegory_types = ["tent", "house", "mixed", "jamboree", "jamborette"]
 var layer_list = [campside_yard, campside_house, campside_mixed, campsite_jamboree, campsite_jamborette];
 var icon_list = [icon_campside, icon_house, icon_mixed, icon_jamboree, icon_jamborette];
 
-/*
-//Sets all makers on the corresponding layers
-var entry_id = 1;
-for (elem in list_places) {
-	var index = cathegory_types.indexOf(list_places[elem].cathegory);
-	list_places[elem].id = entry_id;
-
-	L.marker([list_places[elem].coords.lat, list_places[elem].coords.lng],
-		{ icon: icon_list[index], alt: entry_id })
-		.bindPopup(list_places[elem].name)
-		.on('mouseover', function (e) { this.openPopup(); })
-		.on('mouseout', function (e) { this.closePopup(); })
-		.on('click', function (e) { updateSidebar(this._icon.alt, 1, 1); }) //this._popup._content//replace by this.sourcetarget.options.alt
-		.addTo(layer_list[index]);
-	entry_id++;
-}*/
-
 /* Example for filter
 
 // filter function, change from "parking" to "stadium", to show only one marker on the map
@@ -107,7 +90,7 @@ function onEachFeature(feature, layer) {
 	layer.addTo(selectBasedOnCathegory(feature, layer_list));
 }
 
-L.geoJSON(geojsonFeature, {
+L.geoJSON(list_places, {
 	pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {icon: selectBasedOnCathegory(feature, icon_list)});
 	},
@@ -212,7 +195,7 @@ var options = {
 };
 
 //Init fuse search
-var fuse = new Fuse(geojsonFeature, options);
+var fuse = new Fuse(list_places, options);
 
 /*****************************
  * LEAFLETJS RELVATED EVENTS *
@@ -238,7 +221,7 @@ var poiCounter = 1;
 //@function updateSidebar (String cs_name, Int prev_state{0,1}, Int opensidebar{0,1})
 //Update Sidebar after marker onclick-event 
 function updateSidebar(index, prev_state, opensidebar) {
-	var cur_entry = geojsonFeature[--index];
+	var cur_entry = list_places[--index];
 	var lat = cur_entry.geometry.coordinates[1];
 	var lng = cur_entry.geometry.coordinates[0];
 	if (opensidebar == 1) {
@@ -364,11 +347,17 @@ function deleteAllPoi() {
 function updateStateHighlight(state) {
 	geoJSONLayer.clearLayers();
 	var states_codes = ["vab", "trl", "vie", "ooe", "noe", "stm", "sbg", "ktn", "bgl"];
-	if (state != "all") {
-		var index = states_codes.indexOf(state);
-		geoJSONLayer.addData(state_geojson.features[index]);
+	if (state != "non") {
+		if (state == "all"){
+			for (elem in states_codes){
+				geoJSONLayer.addData(state_geojson.features[elem]);
+			}
+		}
+		else {
+			var index = states_codes.indexOf(state);
+			geoJSONLayer.addData(state_geojson.features[index]);
+		}
 	}
-
 }
 
 //function submitFeedback()
