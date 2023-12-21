@@ -1,0 +1,123 @@
+/*
+Color Theme
+blue: #0c5dc5
+blue-dark: #043069;
+green:  #13803e;
+green-dark. #0a4521
+*/
+
+/******************
+ * ROOT PROPRTIES *
+ ******************/
+
+:root {
+  --color_main: #13803e;
+  --color_accent: #043069;
+
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body,
+html,
+input,
+textarea {
+  font-size: 0.9em;
+  font-family: "Lato", sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+/*****************************
+ * BASIC STYLING FOR CLASSES *
+ *****************************/
+
+input.button {
+  background-color: var(--color_main);
+  color: #FFF;
+  width: 30%;
+  padding: 2% 0% 2% 0%;
+  margin: 1% 35% 1% 35%;
+  border-radius: 5px;
+  border-style: none;
+}
+
+input.text_input,
+textarea.text_input {
+  width: 74%;
+  padding: 3%;
+  margin: 0% 10% 5% 10%;
+  border: hidden;
+  background-color: #EEE;
+}
+
+
+/***************
+ * MAP STYLING *
+ ***************/
+#map {
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/***************
+ * INFO Overlay *
+ ***************/
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  border-color: #b9b2b2;
+  border-style: solid;
+}
+.info h4 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  color: #9D2632;
+  text-align: center;
+}
+.info .name {
+  color: #4D4F5A;
+  font-size: 16px;
+}
+.info p {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+
+
+/****************
+ * MEDIA QUERYS *
+ ****************/
+/*Media Query for narrow screens*/
+@media (max-width: 500px) {
+  #overlay_content {
+    height: 90%;
+    overflow-y: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  #overlay_content li {
+    padding: 5% 0 5% 0;
+    text-align: center;
+  }
+
+  #overlay_content li>i {
+    display: block;
+    text-align: center;
+  }
+
+}
