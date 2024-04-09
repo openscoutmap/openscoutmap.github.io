@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexbox Layout</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+    width: 90%;
+    padding: 10px;
+    background-color: #fff;
+  }
+
+  .box {
+    width: 40%;
+    height: 200px; /* Change this value as needed */
+    margin-left: 4%;
+    margin-right: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .container {
+      max-width: 400px;
+    }
+    .box {
+      width: calc(100% - 10px);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="box">
+    <a href="http://test.at"><img src="/portals/0/kachel_gab.png?ver=rGH2LuVnhW0ALfIv3fKGNw%3d%3d
+"></a>
+  </div>
+  <div class="box">
+    <a href="http://test.at"><img src="/portals/0/kachel_gab.png?ver=rGH2LuVnhW0ALfIv3fKGNw%3d%3d
+"></a>
+  </div>
+  <div class="box">
+    <a href="http://test.at"><img src="/portals/0/kachel_gab.png?ver=rGH2LuVnhW0ALfIv3fKGNw%3d%3d
+"></a>
+  </div>
+  <div class="box">
+    <a href="http://test.at"><img src="/portals/0/kachel_gab.png?ver=rGH2LuVnhW0ALfIv3fKGNw%3d%3d
+"></a>
+  </div>
+  <div class="box">
+    <a href="http://test.at"><img src="/portals/0/kachel_gab.png?ver=rGH2LuVnhW0ALfIv3fKGNw%3d%3d
+"></a>
+  </div>
+  <div class="box">
+    <a href="http://test.at"><img src="/portals/0/kachel_gab.png?ver=rGH2LuVnhW0ALfIv3fKGNw%3d%3d
+"></a>
+  </div>
+</div>
+</body>
+</html>
