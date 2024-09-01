@@ -1,4 +1,4 @@
-var geojsonFeature =[
+var list_places =[
     {
         "type": "Feature",
         "properties": {
@@ -496,6 +496,156 @@ var geojsonFeature =[
             "coordinates": [
                 15.399113,
                 47.032817
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "Witzy-Camp",
+            "addr": "Rheinstra\u00dfe 243",
+            "postalcode": "6800 Feldbkirch Bangs",
+            "state": "VAB",
+            "country": "AUT",
+            "desc": "",
+            "website": "https://pfadi-feldkirch.com/#huetteulager",
+            "imgsrc": "logo_feldkirch.png",
+            "tag": "",
+            "cathegory": "tent",
+            "lat": "47.272722",
+            "lng": "9.535384",
+            "id": 21
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                9.535384,
+                47.272722
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "Haus Ratti",
+            "addr": "Furx 28",
+            "postalcode": "6835 Zwischenwasser",
+            "state": "VAB",
+            "country": "AUT",
+            "desc": "Gem\u00fctliche, neu errichtete Ferienh\u00fctte im Ortsteil Furx  (Alpe Furx) der Gemeinde Zwischenwasser mit herrlichem Blick auf das Rheintal ladet ein, in ungest\u00f6rter und sehr sonniger Lage den Aufenthalt zu genie\u00dfen. Auch f\u00fcr Jugendlager, Seminare, Probenwochenenden kann die H\u00fctte gemietet werden (Preis auf Anfrage). Die H\u00fctte liegt in ca. 1.100 m Seeh\u00f6he.",
+            "website": "https://pfadi-feldkirch.com/#huetteulager",
+            "imgsrc": "logo_feldkirch.png",
+            "tag": "Matrazenlager. Grillplatz, K\u00fcche",
+            "cathegory": "house",
+            "lat": "47.276974",
+            "lng": "9.691764",
+            "id": 22
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                9.691764,
+                47.276974
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "EUROCAMP",
+            "addr": "B\u00f6ngern 10 ",
+            "postalcode": "6850 Dornbirn",
+            "state": "VAB",
+            "country": "AUT",
+            "desc": " Auf einer Anh\u00f6he mit herrlichem Panoramablick \u00fcber das Rheintal gelegen, ladet das EUROCAMP zu allerhand Kreativit\u00e4t ein. Seine Infrastruktur und die umfangreiche Ausstattung bietet f\u00fcr Gruppen, bis zu 80 Jugendlichen, auf ca. 6000 m2 Lagergel\u00e4nde Platz f\u00fcr abwechslungsreiches Campieren. Angeschlossen sind 10.000 m2 Sport- und Spielfl\u00e4che. Das Eurocamp ist Ausgangspunkt f\u00fcr zahlreiche Aktivit\u00e4ten: Ausfl\u00fcge in die Rappenlochschlucht, eine der gr\u00f6\u00dften Schluchten in Mitteleuropa, Wanderm\u00f6glichkeiten im unmittelbar angrenzenden Naherholungsgebiet, \u00fcber 230 km Radwanderwege, Badespa\u00df im nahegelegenen Waldbad oder Segelfreuden am Bodensee, Erlebnis auf der l\u00e4ngsten Sommerrodelbahn der Welt oder einfach die Gastfreundlichkeit der Einheimischen genie\u00dfen, z. B. am Treffpunkt Marktplatz im Herzen von Dornbirn. Aber auch bei weniger gutem Wetter bietet Dornbirn attraktive Alternativen mit einem abwechslungsreichen Kulturprogramm w\u00e4hrend des ganzen Jahres. ",
+            "website": "http://eurocamp.xlnet.at/mainframe.html",
+            "imgsrc": "logo_eurocamp.gif",
+            "tag": "Internationaler Lagerpaltz",
+            "cathegory": "tent",
+            "lat": "47.404809",
+            "lng": "9.754937",
+            "id": 23
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                9.754937,
+                47.404809
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "Pfadfindergruppe Ludesch",
+            "addr": "Siedlung 8",
+            "postalcode": "6713 Ludesch",
+            "state": "VAB",
+            "country": "AUT",
+            "desc": "Der Lagerplatz bietet Platz f\u00fcr ca. 50 Personen Konstruktionsholz, Biertische sowie B\u00e4nke stehen zur Verf\u00fcgung. Feuerholz kann nach vorheriger Vereinbarung ebenfalls bereitgestellt werden.",
+            "website": "https://pfadi-ludesch.at/vermietung/",
+            "imgsrc": "logo_ludesch.png",
+            "tag": "Lagerfeuerstelle, ",
+            "cathegory": "mixed",
+            "lat": "47.196554",
+            "lng": "9.775482",
+            "id": 24
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                9.775482,
+                47.196554
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "Pfadfinderlagerplatz N\u00fcziders",
+            "addr": "Mittel\u00e4ule 32",
+            "postalcode": "6714 N\u00fcziders",
+            "state": "VAB",
+            "country": "AUT",
+            "desc": "Das Heim verf\u00fcgt \u00fcber eine gut ausgestattete K\u00fcche, Toiletten mit Duschen, einen gro\u00dfen Aufenthaltsraum und drei Stufenzimmer. Die Wiese vor dem Heim kann zum Spielen und Lagern verwendet werden. Hinter dem Heim befindet sich eine Feuerstelle.",
+            "website": "https://www.pfadi-nueziders.at/?page_id=43",
+            "imgsrc": "logo_nuedizers.png",
+            "tag": "",
+            "cathegory": "mixed",
+            "lat": "47.173793",
+            "lng": "9.786146",
+            "id": 25
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                9.786146,
+                47.173793
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "Pfadfinderheim Bludenz",
+            "addr": "Sankt-Peter-Stra\u00dfe 49",
+            "postalcode": "6700 Bludenz",
+            "state": "VAB",
+            "country": "AUT",
+            "desc": "Das Heim bietet zwei gro\u00dfe Aufenthaltsr\u00e4ume mit 30 bzw. 50 m\u00b2, verf\u00fcgt \u00fcber 2 WC-Anlagen mit Duschen, K\u00fcche und einem separatem Leiterzimmer. Es liegt mitten im Wald am Stadtrand von Bludenz.",
+            "website": "https://www.pfadfinder-bludenz.com/heim-und-lagerplatzvermietung",
+            "imgsrc": "logo_bludenz.png",
+            "tag": "",
+            "cathegory": "mixed",
+            "lat": "47.147074",
+            "lng": "9.834104",
+            "id": 26
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                9.834104,
+                47.147074
             ]
         }
     }
