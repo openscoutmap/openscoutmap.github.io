@@ -344,7 +344,7 @@ var geojsonFeature =[
         "type": "Feature",
         "properties": {
             "name": "Hard",
-            "content": ["CaEx SoLa 2012","CaEx SoLa 2024" ],
+            "content": ["CaEx SoLa 2024", "CaEx SoLa 2012" ],
             "state": "NOE",
             "country": "AUT",
             "cathegory": "mixed",
@@ -436,7 +436,7 @@ var geojsonFeature =[
     "type": "Feature",
     "properties": {
         "name": "Woidla24 (Waldreichs)",
-        "content": ["GuSP SoLa 2024"],
+        "content": ["GuSp SoLa 2024"],
         "state": "NOE",
         "country": "AUT",
         "cathegory": "mixed",
@@ -449,6 +449,115 @@ var geojsonFeature =[
             48.604337
         ]
     }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Blidingsholms Gård",
+        "content": ["RaRo SoLa 2024 (Aufenthalt)"],
+        "state": "SWE",
+        "country": "SWE",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            14.713045897803264,
+            56.50751950777226
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Stamm Mizar Alkor",
+        "content": ["RaRo SoLa 2024 (Aufenthalt)"],
+        "state": "HH",
+        "country": "DE",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            10.066691741109384,
+            53.5629203120922
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Lemmer Haven",
+        "content": ["RaRo SoLa 2024 (Ausgangsort Segeltörn)"],
+        "state": "NL",
+        "country": "NL",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            5.693961634601576,
+            52.84035610651268
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Gruppo Scout G.E.L.",
+        "content": ["RaRo SoLa 2023 (Aufenthalt)"],
+        "state": "LOM",
+        "country": "IT",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            9.095153425375203,
+            45.498121389983325
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Gruppo Scout AGESCI Verona 4",
+        "content": ["RaRo SoLa 2023 (Aufenthalt)"],
+        "state": "VEN",
+        "country": "IT",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            10.958158766981516,
+            45.45238190474929
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Sede CNGEI - Sezione di Venezia",
+        "content": ["RaRo SoLa 2023 (Aufenthalt)"],
+        "state": "VEN",
+        "country": "IT",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            12.261971907552427,
+            45.475108848214276, 
+        ]
+    }
 }
 ];
+
 
