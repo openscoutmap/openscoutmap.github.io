@@ -557,7 +557,105 @@ var geojsonFeature =[
             45.475108848214276, 
         ]
     }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Asparn a. d. Zaya",
+        "content": ["WiWö SoLa 2021 (Aufenthalt)"],
+        "state": "NOE",
+        "country": "AT",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            16.49073062245957,
+            48.58751736281901, 
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "PNEC (Parque Nacional de Escotismo da Caparica)",
+        "content": ["RaRo SoLa 2019 (Aufenthalt)"],
+        "state": "PT",
+        "country": "PT",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -9.239599676597372,
+            38.65049803098028
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Gerês Vidoeiro Camping (Nationalpark)",
+        "content": ["RaRo SoLa 2019 (Aufenthalt)"],
+        "state": "PT",
+        "country": "PT",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -8.15832326396057,
+            41.74020443261403, 
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Kiel",
+        "content": ["RaRo SoLa 2017 (Ausgangsort Segeltörn)"],
+        "state": "NL",
+        "country": "NL",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            10.607396058978154,
+            54.610846792069786 
+        ]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Spejdercentret Gurredam",
+        "content": ["RaRo SoLa 2017 (Aufenthalt)"],
+        "state": "DK",
+        "country": "DK",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            12.530992750224765,
+            56.03173711285918 
+        ]
+    }
 }
 ];
+
+
+
+
+
+
+
+
 
 
