@@ -182,7 +182,7 @@ var geojsonFeature =[
         "type": "Feature",
         "properties": {
             "name": "St. Georgen (Scout Camp Austria)",
-            "content": ["Gruppen SoLa 2011", "Gruppen SoLa 2006", "Gruppen SoLa 2001"],
+            "content": ["Gruppen SoLa 2025", "Gruppen SoLa 2011", "Gruppen SoLa 2006", "Gruppen SoLa 2001"],
             "state": "OOE",
             "country": "AUT",
             "cathegory": "mixed",
@@ -344,7 +344,7 @@ var geojsonFeature =[
         "type": "Feature",
         "properties": {
             "name": "Hard",
-            "content": ["CaEx SoLa 2012"],
+            "content": ["CaEx SoLa 2012","CaEx SoLa 2024" ],
             "state": "NOE",
             "country": "AUT",
             "cathegory": "mixed",
@@ -412,8 +412,43 @@ var geojsonFeature =[
                 47.408340712409846
             ]
         }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "Straßhof/Nordbahn",
+            "content": ["WiWö SoLa 2024"],
+            "state": "NOE",
+            "country": "AUT",
+            "cathegory": "mixed",
+            "id": 1
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                16.668080286400887,
+                48.32115448266124
+            ]
+        }
     }
-
-
-
+,
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Woidla24 (Waldreichs)",
+        "content": ["GuSP SoLa 2024"],
+        "state": "NOE",
+        "country": "AUT",
+        "cathegory": "mixed",
+        "id": 1
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            15.342214,
+            48.604337
+        ]
+    }
+}
 ];
+
